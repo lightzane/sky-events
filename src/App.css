@@ -1,0 +1,16 @@
+.gantt {
+  display: grid;
+  row-gap: 0.5rem;
+  grid-template-columns: repeat(8, 1fr);
+  background: repeating-linear-gradient(
+    to right,
+    #f2f2f2,
+    #ccc 2px,
+    transparent 2px,
+    transparent calc(100% / 8)
+  );
+}
+
+.future {
+  width: calc(100% / 8);
+}
