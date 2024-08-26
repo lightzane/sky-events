@@ -13,13 +13,13 @@ type Props = {
 export default ({ events }: Props) => {
   const days = DateUtil.getCurrentWeek();
 
-  const sortedEvents = sortEvents(events);
+  const sortedEvents = sortEvents(events, +days[0]);
 
   return (
     <div className='grid grid-cols-12 max-w-7xl sm:max-w-full'>
       {/* Events List Grid */}
       <div className='grid gap-y-2 col-span-2'>
-        <EventsList events={events} />
+        <EventsList events={sortedEvents} />
       </div>
 
       {/* Main Grid: Gantt Chart */}

@@ -1,17 +1,15 @@
 import { Event } from '../../data';
-import { cn, sortEvents } from '../../utils';
+import { cn } from '../../utils';
 
 type Props = {
   events: Event[];
 };
 
 export default ({ events }: Props) => {
-  const sortedEvents = sortEvents(events);
-
   return (
     <>
       <div className='sticky top-0 z-10 bg-sky-900 text-white p-5'>Events</div>
-      {sortedEvents.map((event) => (
+      {events.map((event) => (
         <div
           key={event.id}
           className={cn(

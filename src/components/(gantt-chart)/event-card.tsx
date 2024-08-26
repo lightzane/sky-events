@@ -48,7 +48,8 @@ export default ({ days, event, index }: Props) => {
             days[days.length - 1],
           ),
           'bg-green-200': !DateUtil.isExpired(event.start, event.end, +days[0]),
-          'bg-red-200': DateUtil.isEqual(event.end, +days[0]),
+          'bg-gray-200': DateUtil.isEqual(event.end, +days[0]),
+          'bg-red-200': DateUtil.isEqual(event.end, +days[1]),
           'bg-purple-200': DateUtil.isFutureOutsideRange(
             event.start,
             days[days.length - 1],
@@ -70,7 +71,8 @@ export default ({ days, event, index }: Props) => {
       <div
         className={cn('absolute z-10 w-full h-1 bg-green-600 top-0 left-0', {
           'bg-green-600': !DateUtil.isExpired(event.start, event.end, +days[0]),
-          'bg-red-600': DateUtil.isEqual(event.end, +days[0]),
+          'bg-gray-600': DateUtil.isEqual(event.end, +days[0]),
+          'bg-red-600': DateUtil.isEqual(event.end, +days[1]),
           'bg-purple-600': DateUtil.isFutureOutsideRange(
             event.start,
             days[days.length - 1],
@@ -82,10 +84,11 @@ export default ({ days, event, index }: Props) => {
         <>
           <div
             className={cn('absolute top-0 left-0 w-[45%] h-[200%]', {
-              'w-full': DateUtil.isFutureOutsideRange(
-                event.start,
-                days[days.length - 1],
-              ),
+              'w-full':
+                DateUtil.isFutureOutsideRange(
+                  event.start,
+                  days[days.length - 1],
+                ) || DateUtil.isEqual(event.end, +days[0]),
             })}>
             <div className='relative h-full w-full'>
               {/* Gradient Blur (middle) */}
@@ -93,19 +96,22 @@ export default ({ days, event, index }: Props) => {
                 className={cn(
                   'absolute top-0 right-0 w-[60%] h-full bg-gradient-to-r from-transparent to-green-200',
                   {
-                    'to-purple-200 opacity-0': DateUtil.isFutureOutsideRange(
-                      event.start,
-                      days[days.length - 1],
-                    ),
+                    'opacity-0':
+                      DateUtil.isFutureOutsideRange(
+                        event.start,
+                        days[days.length - 1],
+                      ) || DateUtil.isEqual(event.end, +days[0]),
+                    'to-red-200': DateUtil.isEqual(event.end, +days[1]),
                   },
                 )}></div>
               <img
                 // remove `.h-full.w-full` if don't want to stretch image, but it will be small
                 className={cn('h-full w-full', {
-                  'opacity-20': DateUtil.isFutureOutsideRange(
-                    event.start,
-                    days[days.length - 1],
-                  ),
+                  'opacity-20':
+                    DateUtil.isFutureOutsideRange(
+                      event.start,
+                      days[days.length - 1],
+                    ) || DateUtil.isEqual(event.end, +days[0]),
                 })}
                 src={event.imageUrl}
                 alt='Event image'
@@ -117,10 +123,12 @@ export default ({ days, event, index }: Props) => {
             className={cn(
               'absolute top-0 left-0 w-[60%] h-full bg-gradient-to-r from-transparent to-green-200',
               {
-                'to-purple-200 opacity-0': DateUtil.isFutureOutsideRange(
-                  event.start,
-                  days[days.length - 1],
-                ),
+                'opacity-0':
+                  DateUtil.isFutureOutsideRange(
+                    event.start,
+                    days[days.length - 1],
+                  ) || DateUtil.isEqual(event.end, +days[0]),
+                'to-red-200': DateUtil.isEqual(event.end, +days[1]),
               },
             )}></div>
         </>
