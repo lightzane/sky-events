@@ -1,13 +1,14 @@
 import { Event } from '../../data';
-import { cn, DateUtil } from '../../utils';
+import { cn, DateUtil } from '../../shared/utils';
 
 type Props = {
   days: Date[];
   event: Event;
   index: number;
+  onClick: (event: Event) => void;
 };
 
-export default ({ days, event, index }: Props) => {
+export default ({ days, event, index, onClick }: Props) => {
   function getColumnDays(): number {
     // Within Range
     if (DateUtil.getWeekIndex(days, event.start) >= 0) {
@@ -38,11 +39,20 @@ export default ({ days, event, index }: Props) => {
 
   return (
     <div
+      role='button'
+      onClick={() => {
+        if (!DateUtil.isExpired(event.start, event.end)) {
+          onClick(event);
+        }
+      }}
       key={event.id}
       className={cn(
+        'animate-enter',
+        'cursor-pointer rounded-lg',
         'text-sm md:text-base p-5 relative left-[0.2%] truncate',
         'h-28', // sync height with events-list.tsx
         {
+          'cursor-default': DateUtil.isExpired(event.start, event.end),
           'shadow-md text-center': !DateUtil.isFutureOutsideRange(
             event.start,
             days[days.length - 1],
@@ -143,9 +153,19 @@ export default ({ days, event, index }: Props) => {
           ),
         })}>
         <span className='font-semibold'>{event.name}</span>
-        <span className='text-gray-600'>{`${DateUtil.format(
-          event.start,
-        )} - ${DateUtil.format(event.end)}`}</span>
+
+        {/* @ts-expect-error: force-field error */}
+        {!event.error ? (
+          <span className='text-gray-600'>{`${DateUtil.formatDateShort(
+            event.start,
+          )} - ${DateUtil.formatDateShort(event.end)}`}</span>
+        ) : (
+          <span className='text-red-500 font-semibold text-sm'>
+            Invalid or unregistered timezone:{' '}
+            {/* @ts-expect-error: force-field error */}
+            <span className='bg-red-200'>{event.error}</span>
+          </span>
+        )}
       </div>
     </div>
   );

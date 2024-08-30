@@ -1,16 +1,28 @@
-.gantt {
-  display: grid;
-  row-gap: 0.5rem;
-  grid-template-columns: repeat(8, 1fr);
-  background: repeating-linear-gradient(
-    to right,
-    #f2f2f2,
-    #ccc 2px,
-    transparent 2px,
-    transparent calc(100% / 8)
-  );
+::-webkit-scrollbar {
+  /* Customize the scrollbar width */
+  width: 8px;
+  height: 8px;
 }
 
-.future {
-  width: calc(100% / 8);
+::-webkit-scrollbar-track {
+  /* Customize the scrollbar track */
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  /* Customize the scrollbar thumb */
+  /* dracula-dark */
+  /* background-color: hsl(232 14% 31%); */
+  /*background-color: hsla(60, 30%, 96%, 0.5); */ /* light alpha 0.5 */
+  background-color: gray;
+  border-radius: 0.5rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  /* dracula-blue */
+  /* background-color: hsl(232 14% 35%);  */
+  /* light alpha 0.5 */
+  background-color: hsla(60, 30%, 96%, 0.5);
+  cursor: grab;
 }

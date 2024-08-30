@@ -1,0 +1,21 @@
+:root {
+  --span-days: 8; /* default to 1 week (plus 1 for additional column: "Upcoming") */
+}
+
+.gantt,
+.vertical-lines {
+  display: grid;
+  row-gap: 0.5rem;
+  grid-template-columns: repeat(var(--span-days), 1fr);
+  /* background: repeating-linear-gradient(
+    to right,
+    #f2f2f2,
+    #ccc 2px,
+    transparent 2px,
+    transparent calc(100% / var(--span-days))
+  ); */
+}
+
+.future {
+  width: calc(100% / var(--span-days));
+}

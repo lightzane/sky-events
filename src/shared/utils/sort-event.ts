@@ -1,4 +1,4 @@
-import { Event } from '../data';
+import { Event } from '../../data';
 import { DateUtil } from './date.util';
 
 export function sortEvents(events: Event[], leftOffset = +new Date()) {

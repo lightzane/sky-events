@@ -1,4 +1,4 @@
-import { cn, DateUtil } from '../../utils';
+import { cn, DateUtil } from '../../shared/utils';
 
 type Props = {
   days: Date[] | number[];
@@ -10,15 +10,17 @@ export default ({ days }: Props) => {
       {/* Days column */}
       {days.map((day) => (
         <div
-          key={DateUtil.getDayName(day) + DateUtil.format(day)}
+          key={DateUtil.getDayName(day) + DateUtil.formatDateShort(day)}
           className={cn(
             'sticky top-0 z-20',
-            'bg-sky-200 text-sky-950 p-3 border-l-2 border-l-sky-100',
+            'bg-sky-200 text-sky-950 p-3 border-l-2 border-l-sky-100 min-w-14',
             { 'bg-sky-100': DateUtil.isToday(day) },
           )}>
           <div className='flex flex-col text-sm'>
             <span>{DateUtil.getDayName(day)}</span>
-            <span className='font-semibold'>{DateUtil.format(day)}</span>
+            <span className='font-semibold'>
+              {DateUtil.formatDateShort(day)}
+            </span>
           </div>
         </div>
       ))}
