@@ -76,6 +76,7 @@ export default ({ event, onClose }: Props) => {
     };
   }, [event]);
 
+  /** Typically used in "EVENT WILL LAST" */
   function DateEndComponent() {
     if (!event) {
       return <></>;
@@ -90,8 +91,8 @@ export default ({ event, onClose }: Props) => {
           </>
         ) : (
           <>
-            {DateTime.fromMillis(event.end).toFormat('cccc t')}
-            {/* cccc t = Monday 12:00 AM */}
+            {DateTime.fromMillis(event.end).toFormat('LLL L, cccc t')}
+            {/* LLL L, cccc t = Sep 9, Monday 12:00 AM */}
           </>
         )}
       </div>
@@ -146,7 +147,7 @@ export default ({ event, onClose }: Props) => {
                   <div className='text-xs text-gray-700'>
                     THE EVENT WILL LAST
                   </div>
-                  <div className='flex items-end'>
+                  <div className='flex items-end animate-pulse text-orange-600'>
                     {!days && !hours && !minutes && (
                       <div className='animate-spin'>
                         <LucideLoader2 />
