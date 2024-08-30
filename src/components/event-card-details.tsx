@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { Event } from '../data';
 import { DateUtil } from '../shared/utils';
 import ModalOverlay from './modal-overlay';
-import { LucideLoader2 } from 'lucide-react';
 
 type Props = {
   event?: Event;
@@ -18,6 +17,8 @@ export default ({ event, onClose }: Props) => {
   const [days, setDays] = useState(0);
   const [hours, setHours] = useState(0);
   const [minutes, setMinutes] = useState(0);
+  const [seconds, setSeconds] = useState(0);
+
   const [now, setNow] = useState(Date.now());
 
   useEffect(() => {
@@ -61,11 +62,12 @@ export default ({ event, onClose }: Props) => {
       const d = Math.floor(diff / day);
       const h = Math.floor((diff % day) / hour);
       const m = Math.floor((diff % hour) / minute);
-      // const s = Math.floor((diff % minute) / second);
+      const s = Math.floor((diff % minute) / second);
 
       setDays(d);
       setHours(h);
       setMinutes(m);
+      setSeconds(s);
     }
 
     return () => {
@@ -73,6 +75,7 @@ export default ({ event, onClose }: Props) => {
       setDays(0);
       setHours(0);
       setMinutes(0);
+      setSeconds(0);
     };
   }, [event]);
 
@@ -142,17 +145,12 @@ export default ({ event, onClose }: Props) => {
             {/* On-going event + countdown */}
             {(!DateUtil.isFutureOutsideRange(event.start, new Date()) ||
               (event.end > now && now > event.start)) &&
-              (days > -1 || hours > -1 || minutes > -1) && (
+              (days > -1 || hours > -1 || minutes > -1 || seconds > -1) && (
                 <div className='flex flex-col gap-1 p-5 rounded-md bg-emerald-100'>
                   <div className='text-xs text-gray-700'>
                     THE EVENT WILL LAST
                   </div>
                   <div className='flex items-end animate-pulse text-orange-600'>
-                    {!days && !hours && !minutes && (
-                      <div className='animate-spin'>
-                        <LucideLoader2 />
-                      </div>
-                    )}
                     {!!days && (
                       <div className='mx-1.5'>
                         <span className='text-3xl'>{days}</span>
@@ -169,6 +167,14 @@ export default ({ event, onClose }: Props) => {
                       <div className='mx-1.5'>
                         <span className='text-3xl'>{minutes}</span>
                         <span className='text-xl'>m</span>
+                      </div>
+                    )}
+
+                    {/* Display only "seconds" when days and hours are zero */}
+                    {!!seconds && days < 1 && hours < 1 && (
+                      <div className='mx-1.5'>
+                        <span className='text-3xl'>{seconds}</span>
+                        <span className='text-xl'>s</span>
                       </div>
                     )}
                   </div>
