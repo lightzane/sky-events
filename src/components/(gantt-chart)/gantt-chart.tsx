@@ -11,6 +11,7 @@ import './gantt-chart.css';
 
 type Props = {
   events: Event[];
+  addClick?: () => void;
   settingsClick?: () => void;
   spanDaysInput?: number;
   currentDate?: Date;
@@ -19,6 +20,7 @@ type Props = {
 
 export default ({
   events,
+  addClick,
   settingsClick,
   onEventClick,
   spanDaysInput = 7, // Default: 1 week
@@ -59,6 +61,7 @@ export default ({
       <div className='grid gap-y-2 col-span-2'>
         <EventsList
           events={sortedEvents}
+          addClick={addClick}
           settingsClick={settingsClick}
           onEventClick={onEventClick}
         />

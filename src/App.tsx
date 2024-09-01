@@ -14,6 +14,8 @@ import {
   upload,
 } from './shared/utils';
 import { TimeZoneValidator } from './shared/validators';
+import ModalOverlay from './components/modal-overlay';
+import AddEvent from './components/add-event';
 
 export default () => {
   const [showSettings, setShowSettings] = useState(false);
@@ -23,12 +25,52 @@ export default () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [eventDetails, setEventDetails] = useState<Event>(); // event to view details
   const [viewRaw, setViewRaw] = useState(false);
+  const [showAddEvent, setShowAddEvent] = useState(false);
+  const [eventAdded, setEventAdded] = useState(false);
+  const [additionalImport, setAdditionalImport] = useState(false);
+  const [editEvent, setEditEvent] = useState<Event>();
+  const [editEventId, setEditEventId] = useState<string>();
+  const [deleteEventId, setDeleteEventId] = useState<string>();
 
   const fileUploadRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     localizedEvents(FEATURED_EVENTS);
   }, []);
+
+  // Detect edit
+  useEffect(() => {
+    if (editEventId) {
+      const event = dataInput.find((e) => e.id === editEventId);
+      setEditEventId(undefined);
+
+      if (event) {
+        setEditEvent(event);
+        setShowAddEvent(true);
+      }
+    }
+  }, [editEventId]);
+
+  // Detect deletion
+  useEffect(() => {
+    if (deleteEventId) {
+      const event = dataInput.find((e) => e.id === deleteEventId);
+      setDeleteEventId(undefined);
+
+      if (event) {
+        const newList = dataInput.filter((e) => e.id !== event.id);
+        localizedEvents(newList);
+      }
+    }
+  }, [deleteEventId]);
+
+  // Detect dataInput
+  useEffect(() => {
+    if (eventAdded) {
+      setEventAdded(false);
+      handleExport();
+    }
+  }, [dataInput]);
 
   function toggleSettings() {
     setShowSettings((t) => !t);
@@ -44,8 +86,9 @@ export default () => {
     download(preYaml(dataInput));
   }
 
-  function handleImport() {
+  function handleImport(additional = false) {
     fileUploadRef.current?.click();
+    setAdditionalImport(additional);
   }
 
   function handleViewRaw() {
@@ -143,9 +186,16 @@ export default () => {
   }
 
   function handleFileSelect(e: React.ChangeEvent<HTMLInputElement>) {
+    const currentList = [...dataInput].map((event) => ({ ...event }));
+
     upload(e, fileUploadRef, (uploadedEvents) => {
+      if (additionalImport) {
+        uploadedEvents.push(...currentList);
+      }
       localizedEvents(uploadedEvents);
       setShowSettings(false);
+      setShowAddEvent(false);
+      setAdditionalImport(false); // reset
     });
   }
 
@@ -159,6 +209,7 @@ export default () => {
         <div className='flex flex-col gap-y-10'>
           <GanttChart
             events={localized}
+            addClick={() => setShowAddEvent(true)}
             settingsClick={toggleSettings}
             spanDaysInput={spanDays}
             currentDate={currentDate}
@@ -169,7 +220,7 @@ export default () => {
             show={showSettings}
             onClose={toggleSettings}
             onDataReset={handleReset}
-            onDataImport={handleImport}
+            onDataImport={() => handleImport()}
             onDataExport={handleExport}
             onViewRaw={handleViewRaw}
             onCurrentDate={handleChangeDate}
@@ -195,6 +246,18 @@ export default () => {
                 setEventDetails(undefined);
               }, 500)
             }
+            onEdit={(eventId) => {
+              setTimeout(() => {
+                setEventDetails(undefined);
+                setEditEventId(eventId);
+              }, 500);
+            }}
+            onDelete={(eventId) => {
+              setDeleteEventId(eventId);
+              setTimeout(() => {
+                setEventDetails(undefined);
+              }, 500);
+            }}
           />
 
           {/* View Raw Details */}
@@ -203,6 +266,43 @@ export default () => {
             show={viewRaw}
             onClose={() => setViewRaw(false)}
           />
+
+          {/* Add Event */}
+          <ModalOverlay
+            className='max-w-md'
+            showModal={showAddEvent}
+            onClose={() => setShowAddEvent(false)}>
+            <AddEvent
+              editEvent={editEvent}
+              onStartDateChanged={(date) => setCurrentDate(date)}
+              onImportClick={() => handleImport(true)}
+              onSubmit={(event, update) => {
+                setEventAdded(true); // see useEffect that may trigger
+
+                const newlist = [...dataInput].map((event) => ({ ...event }));
+
+                if (update) {
+                  const existingIdx = newlist.findIndex(
+                    (e) => e.id === event.id,
+                  );
+
+                  if (existingIdx >= 0) {
+                    newlist[existingIdx] = event;
+                  }
+
+                  setEditEvent(undefined);
+                  setEditEventId(undefined);
+                }
+                // New Event
+                else {
+                  newlist.push(event);
+                }
+
+                localizedEvents(newlist);
+                setShowAddEvent(false);
+              }}
+            />
+          </ModalOverlay>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 import { useEffect, useState } from 'react';
 
+import { LucideEdit3, LucideTrash } from 'lucide-react';
 import { Event } from '../data';
 import { DateUtil } from '../shared/utils';
 import ModalOverlay from './modal-overlay';
@@ -8,9 +9,11 @@ import ModalOverlay from './modal-overlay';
 type Props = {
   event?: Event;
   onClose: () => void;
+  onEdit: (id: string) => void;
+  onDelete: (id: string) => void;
 };
 
-export default ({ event, onClose }: Props) => {
+export default ({ event, onClose, onEdit, onDelete }: Props) => {
   const [show, setShow] = useState(false);
 
   // to be used on countdown
@@ -120,12 +123,12 @@ export default ({ event, onClose }: Props) => {
           )}
 
           {/* Card content */}
-          <div className='flex flex-col gap-y-2'>
+          <div className='flex flex-col gap-y-2 group'>
             {/* Header */}
             <div className='flex flex-col border-b-2 border-b-gray-200 pb-2'>
               <span className='text-gray-500 uppercase text-xs'>
                 <span className='font-semibold text-base'>
-                  {DateUtil.getTotalDays(event.start, event.end)}
+                  {DateUtil.getTotalDays(event.start, event.end) || 1}
                 </span>{' '}
                 day event
               </span>
@@ -201,6 +204,22 @@ export default ({ event, onClose }: Props) => {
                   </div>
                 </div>
               )}
+
+            {/* Actions */}
+            <div className='flex gap-x-3 opacity-0 group-hover:opacity-100 transition duration-300'>
+              <button
+                type='button'
+                className='sm:opacity-30 hover:opacity-100'
+                onClick={() => onEdit(event.id)}>
+                <LucideEdit3 className='w-5 h-5' />
+              </button>
+              <button
+                type='button'
+                className='sm:opacity-30 hover:opacity-100'
+                onClick={() => onDelete(event.id)}>
+                <LucideTrash className='w-5 h-5 text-red-500' />
+              </button>
+            </div>
           </div>
         </>
       )}

@@ -1,14 +1,15 @@
-import { LucideSettings } from 'lucide-react';
+import { LucidePlus, LucideSettings } from 'lucide-react';
 import { Event } from '../../data';
 import { cn, DateUtil } from '../../shared/utils';
 
 type Props = {
   events: Event[];
+  addClick?: () => void;
   settingsClick?: () => void;
   onEventClick: (event: Event) => void;
 };
 
-export default ({ events, settingsClick, onEventClick }: Props) => {
+export default ({ events, settingsClick, addClick, onEventClick }: Props) => {
   return (
     <>
       <div
@@ -17,19 +18,35 @@ export default ({ events, settingsClick, onEventClick }: Props) => {
         })}>
         <div className='flex justify-between items-center'>
           <span>Events</span>
-          {!!settingsClick && (
-            <button
-              onClick={settingsClick}
-              type='button'
-              className='group p-1 rounded-full relative hover:rotate-90 transition-all duration-300'>
-              <span>
-                <LucideSettings />
-              </span>
-              <span className='absolute inset-0 p-1 opacity-20 group-hover:blur-sm group-hover:opacity-70 transition-all duration-300'>
-                <LucideSettings />
-              </span>
-            </button>
-          )}
+          <div className='flex items-center'>
+            {!!addClick && (
+              <button
+                onClick={addClick}
+                type='button'
+                className='group p-1 rounded-full relative transition-all duration-300'>
+                <span>
+                  <LucidePlus />
+                </span>
+                <span className='absolute inset-0 p-1 opacity-20 group-hover:blur-sm group-hover:opacity-70 transition-all duration-300'>
+                  <LucidePlus />
+                </span>
+              </button>
+            )}
+
+            {!!settingsClick && (
+              <button
+                onClick={settingsClick}
+                type='button'
+                className='group p-1 rounded-full relative hover:rotate-90 transition-all duration-300'>
+                <span>
+                  <LucideSettings />
+                </span>
+                <span className='absolute inset-0 p-1 opacity-20 group-hover:blur-sm group-hover:opacity-70 transition-all duration-300'>
+                  <LucideSettings />
+                </span>
+              </button>
+            )}
+          </div>
         </div>
       </div>
       {events.map((event) => (

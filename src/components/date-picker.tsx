@@ -41,6 +41,12 @@ export default ({
   const [showMonthPicker, setShowMonthPicker] = useState(false);
   const [showYearPicker, setShowYearPicker] = useState(false);
 
+  useEffect(() => {
+    if (defaultDate && resetTime(defaultDate) !== resetTime(selectedDate)) {
+      setSelectedDate(defaultDate);
+    }
+  }, [defaultDate]);
+
   // Update selected date that it will not violate min/max dates
   useEffect(() => {
     if (min && isUnderMin(selectedDate)) {
