@@ -15,6 +15,7 @@ import DatePicker from './date-picker';
 
 type Props = {
   show: boolean;
+  currentDateInput?: Date;
   onClose?: () => void;
   onDataReset: () => void;
   onDataImport: () => void;
@@ -26,6 +27,7 @@ type Props = {
 
 export default ({
   show,
+  currentDateInput,
   onClose,
   onCurrentDate,
   onDataReset,
@@ -36,7 +38,9 @@ export default ({
 }: Props) => {
   const [numOfDays, setNumOfDays] = useState(7);
   const [copied, setCopied] = useState(false);
-  const [currentDate, setCurrentDate] = useState(new Date());
+  const [currentDate, setCurrentDate] = useState(
+    currentDateInput || new Date(),
+  );
 
   const [showDatePicker, setShowDatePicker] = useState(false);
 
@@ -47,6 +51,15 @@ export default ({
   useEffect(() => {
     onCurrentDate(currentDate);
   }, [currentDate]);
+
+  useEffect(() => {
+    if (
+      currentDateInput &&
+      currentDateInput.setHours(0, 0, 0, 0) !== currentDate.setHours(0, 0, 0, 0)
+    ) {
+      setCurrentDate(currentDateInput);
+    }
+  }, [currentDateInput]);
 
   useEffect(() => {
     toggleWeeks?.(numOfDays);

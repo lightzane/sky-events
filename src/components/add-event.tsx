@@ -14,13 +14,13 @@ import ModalOverlay from './modal-overlay';
 type Props = {
   editEvent?: Event;
   onImportClick: () => void;
-  onStartDateChanged: (date: Date) => void;
+  onDateChanged: (date: Date) => void;
   onSubmit: (event: Event, update: boolean) => void;
 };
 
 export default ({
   editEvent,
-  onStartDateChanged,
+  onDateChanged,
   onSubmit,
   onImportClick,
 }: Props) => {
@@ -51,6 +51,8 @@ export default ({
   useEffect(() => {
     if (editEvent) {
       populateFields(editEvent);
+    } else {
+      reset();
     }
   }, [editEvent]);
 
@@ -59,8 +61,6 @@ export default ({
       setSubmitted(false);
       return;
     }
-
-    onStartDateChanged(startDate);
 
     if (startDate > endDate) {
       setEndDate(startDate);
@@ -136,7 +136,6 @@ export default ({
     setEndDate(today);
     setStartTime('');
     setEndTime('');
-    setDefaultDate(today);
     setMin(undefined);
     setEventName('');
 
@@ -149,17 +148,19 @@ export default ({
     }
   }
 
-  function handleDateBtnClick(whichDate: 'start' | 'end') {
+  function handleDateBtnClick(whichDate: 'start' | 'end', date: Date) {
     if (whichDate === 'start') {
       setToggleDate('start');
-      setDefaultDate(startDate);
+      setDefaultDate(date);
+      onDateChanged(date);
       setMin(undefined);
     }
 
     // end date
     else {
       setToggleDate('end');
-      setDefaultDate(endDate);
+      setDefaultDate(date);
+      onDateChanged(date);
       setMin(startDate);
     }
 
@@ -167,6 +168,8 @@ export default ({
   }
 
   function handleDatePicked(date: Date) {
+    onDateChanged(date);
+
     if (toggleDate === 'start') {
       setStartDate(date);
     }
@@ -219,7 +222,7 @@ export default ({
               type='text'
               name='event-name'
               id='event-name'
-              className='block w-full rounded-md border-0 py-1.5 pr-20 text-blue-700 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:leading-6'
+              className='block w-full rounded-md border-0 py-1.5 pr-20 text-blue-500 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:leading-6'
               maxLength={20}
               onKeyUp={(e) => setEventName(e.currentTarget.value.trim())}
             />
@@ -246,7 +249,10 @@ export default ({
                 name='date-start'
                 id='date-start'
                 className='w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-blue-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6'
-                onClick={() => handleDateBtnClick('start')}>
+                onClick={(e) => {
+                  const date = e.currentTarget.innerText;
+                  handleDateBtnClick('start', new Date(date));
+                }}>
                 <span className='font-semibold text-blue-500'>
                   {DateTime.fromJSDate(startDate)
                     .toFormat('dd-MMM-yyyy')
@@ -281,7 +287,7 @@ export default ({
                   type='text'
                   name='time-start'
                   id='time-start'
-                  className='block w-full rounded-md border-0 py-1.5 text-center text-blue-700 ring-1 ring-inset ring-blue-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:leading-6'
+                  className='block w-full rounded-md border-0 py-1.5 text-center text-blue-500 ring-1 ring-inset ring-blue-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:leading-6'
                   maxLength={20}
                   defaultValue={startTime}
                 />
@@ -306,7 +312,10 @@ export default ({
                 name='date-end'
                 id='date-end'
                 className='w-full rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-blue-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6'
-                onClick={() => handleDateBtnClick('end')}>
+                onClick={(e) => {
+                  const date = e.currentTarget.innerText;
+                  handleDateBtnClick('end', new Date(date));
+                }}>
                 <span className='font-semibold text-blue-500'>
                   {DateTime.fromJSDate(endDate)
                     .toFormat('dd-MMM-yyyy')
@@ -341,7 +350,7 @@ export default ({
                   type='text'
                   name='time-end'
                   id='time-end'
-                  className='block w-full rounded-md border-0 py-1.5 text-center text-blue-700 ring-1 ring-inset ring-blue-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:leading-6'
+                  className='block w-full rounded-md border-0 py-1.5 text-center text-blue-500 ring-1 ring-inset ring-blue-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:leading-6'
                   maxLength={20}
                   defaultValue={endTime}
                 />

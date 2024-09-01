@@ -218,6 +218,7 @@ export default () => {
 
           <GanttChartSettings
             show={showSettings}
+            currentDateInput={currentDate}
             onClose={toggleSettings}
             onDataReset={handleReset}
             onDataImport={() => handleImport()}
@@ -267,14 +268,18 @@ export default () => {
             onClose={() => setViewRaw(false)}
           />
 
-          {/* Add Event */}
+          {/* Add/Edit Event */}
           <ModalOverlay
             className='max-w-md'
             showModal={showAddEvent}
-            onClose={() => setShowAddEvent(false)}>
+            onClose={() => {
+              setShowAddEvent(false);
+              setEditEvent(undefined);
+              setEditEventId(undefined);
+            }}>
             <AddEvent
               editEvent={editEvent}
-              onStartDateChanged={(date) => setCurrentDate(date)}
+              onDateChanged={(date) => setCurrentDate(date)}
               onImportClick={() => handleImport(true)}
               onSubmit={(event, update) => {
                 setEventAdded(true); // see useEffect that may trigger
