@@ -1,5 +1,3 @@
-// Gantt Chart - Basic CSS
-// https://www.youtube.com/watch?v=s4_ARM8KBm0
 import React, { useEffect, useRef, useState } from 'react';
 
 import './App.css';
@@ -72,8 +70,8 @@ export default () => {
 
       const defaultHour = whichTime === 'start' ? 0 : 23;
 
-      let hours = TimeRegexUtil.getHour(event.time[whichTime]) || defaultHour;
-      const minutes = TimeRegexUtil.getMinute(event.time[whichTime]) || 0;
+      let hours = TimeRegexUtil.getHour(event.time[whichTime]) ?? defaultHour; // SonarLint: Prefer using nullish coalescing operator (`??`) instead of af logical or (`||`), as it is a safer operator.
+      const minutes = TimeRegexUtil.getMinute(event.time[whichTime]) ?? 0;
 
       // 24-hour
       if (event.time[whichTime].includes('am') && hours === 12) {
@@ -94,13 +92,14 @@ export default () => {
     }
 
     const hasError = (validated: string) =>
-      validated.match(/not supported|invalid/i);
+      // SonarLint: Use the "RegExp.exec()" method instead of validated.match(...)
+      /not supported|invalid/i.exec(validated);
 
     // Time field exists
     if (time[whichTime]) {
       let validated = time[whichTime];
 
-      // Timezone is specified
+      // Valid Timezone is specified
       if (
         TimeRegexUtil.timeZoneAbbr(time[whichTime].replace(/#.*$/, '').trim()) // remove comments if any
       ) {

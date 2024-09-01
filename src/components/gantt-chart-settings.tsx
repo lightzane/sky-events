@@ -7,10 +7,11 @@ import {
   LucideUpload,
 } from 'lucide-react';
 import { DateTime } from 'luxon';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { cn, preYaml, toYaml } from '../shared/utils';
 import ModalOverlay from './modal-overlay';
 import { Event } from '../data';
+import DatePicker from './date-picker';
 
 type Props = {
   show: boolean;
@@ -35,8 +36,17 @@ export default ({
 }: Props) => {
   const [numOfDays, setNumOfDays] = useState(7);
   const [copied, setCopied] = useState(false);
+  const [currentDate, setCurrentDate] = useState(new Date());
 
-  const currentDateRef = useRef<HTMLInputElement>(null);
+  const [showDatePicker, setShowDatePicker] = useState(false);
+
+  useEffect(() => {
+    setShowDatePicker(false);
+  }, [show]);
+
+  useEffect(() => {
+    onCurrentDate(currentDate);
+  }, [currentDate]);
 
   useEffect(() => {
     toggleWeeks?.(numOfDays);
@@ -114,10 +124,7 @@ export default ({
               type='button'
               onClick={() => {
                 onDataReset();
-                if (currentDateRef.current) {
-                  currentDateRef.current.value =
-                    DateTime.now().toFormat('yyyy-MM-dd');
-                }
+                setCurrentDate(new Date());
               }}
               className='shadow-sm flex flex-1 items-center gap-x-1 text-sm px-3 py-1 rounded-lg transition ease-in-out duration-300 outline-none hover:bg-blue-400 text-white bg-blue-500'>
               <LucideRefreshCcw className='w-4 h-4' />
@@ -178,13 +185,24 @@ export default ({
         {/* Current Date */}
         <div className='font-semibold'>Current Date</div>
         <div className='flex items-center justify-center gap-x-1 py-5 px-3'>
-          <input
-            ref={currentDateRef}
-            className='text-sm'
-            type='date'
-            onChange={(e) => onCurrentDate(new Date(e.currentTarget.value))}
-            defaultValue={DateTime.now().toFormat('yyyy-MM-dd')}
-          />
+          <button
+            type='button'
+            className='px-3 py-1 hover:ring-2 hover:ring-blue-500 rounded-lg'
+            onClick={() => setShowDatePicker(true)}>
+            {DateTime.fromJSDate(new Date(currentDate)).toFormat('yyyy-MM-dd')}
+          </button>
+
+          <ModalOverlay
+            withPlate={false}
+            showModal={showDatePicker}
+            onClose={() => setShowDatePicker(false)}>
+            <DatePicker
+              defaultDate={new Date(currentDate)}
+              onClose={() => setShowDatePicker(false)}
+              show={showDatePicker}
+              onDatePicked={(date) => setCurrentDate(date)}
+            />
+          </ModalOverlay>
         </div>
 
         {/* Toggle Weeks */}

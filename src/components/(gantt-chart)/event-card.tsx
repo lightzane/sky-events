@@ -124,7 +124,7 @@ export default ({ days, event, index, onClick }: Props) => {
                     ) || DateUtil.isEqual(event.end, +days[0]),
                 })}
                 src={event.imageUrl}
-                alt='Event image'
+                alt={event.name}
               />
             </div>
           </div>

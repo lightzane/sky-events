@@ -7,9 +7,16 @@ type Props = {
   children?: ReactNode;
   onClose?: () => void;
   className?: string;
+  withPlate?: boolean;
 };
 
-export default ({ showModal, children, onClose, className }: Props) => {
+export default ({
+  showModal,
+  children,
+  onClose,
+  className,
+  withPlate = true,
+}: Props) => {
   useEffect(() => {
     if (showModal) {
       document.body.classList.add('overflow-hidden');
@@ -33,26 +40,37 @@ export default ({ showModal, children, onClose, className }: Props) => {
 
       {/* Content */}
       <div className='fixed inset-0 flex items-center justify-center'>
-        <div
-          className={cn(
-            'relative rounded-lg w-full max-w-xl bg-white shadow-2xl cursor-default p-3',
-            'transition-all ease-in-out duration-300',
-            {
+        {!withPlate && (
+          <div
+            className={cn('transition-all ease-in-out duration-300', {
               'opacity-0 translate-y-20': !showModal,
               'translate-y-0 pointer-events-auto': showModal,
-            },
-            className,
-          )}>
-          <div className='absolute right-0 pr-3'>
-            <button
-              type='button'
-              className='text-gray-300 hover:text-gray-900 transition ease-in-out duration-300'
-              onClick={() => onClose?.()}>
-              <LucideX />
-            </button>
+            })}>
+            {children}
           </div>
-          {children}
-        </div>
+        )}
+        {withPlate && (
+          <div
+            className={cn(
+              'relative rounded-lg w-full max-w-xl bg-white shadow-2xl cursor-default p-3',
+              'transition-all ease-in-out duration-300',
+              {
+                'opacity-0 translate-y-20': !showModal,
+                'translate-y-0 pointer-events-auto': showModal,
+              },
+              className,
+            )}>
+            <div className='absolute right-0 pr-3'>
+              <button
+                type='button'
+                className='text-gray-300 hover:text-gray-900 transition ease-in-out duration-300'
+                onClick={() => onClose?.()}>
+                <LucideX />
+              </button>
+            </div>
+            {children}
+          </div>
+        )}
       </div>
     </div>
   );
