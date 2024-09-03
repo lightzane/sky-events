@@ -24,12 +24,139 @@ type Time = {
   end?: string;
 };
 
+/** `12am PDT >> 11:59pm PDT` */
 const defaultTime = {
   start: '12am PDT',
   end: '11:59pm PDT',
 };
 
+/** `02:28am PDT >> 09:20am PHT` */
+const timeShardAfternoonA = {
+  start: '02:28am PDT',
+  end: '09:20am PHT',
+};
+
+/** `03:38am PDT >> 10:30am PHT` */
+const timeShardAfternoonB = {
+  start: '03:38am PDT',
+  end: '10:30am PHT',
+};
+
+/** `07:48am PDT >> 02:40pm PHT` */
+const timeShardEvening = {
+  start: '07:48am PDT',
+  end: '02:40pm PHT',
+};
+
 export const FEATURED_EVENTS: Event[] = [
+  {
+    id: uuid(),
+    name: '🔺 Red Shard in Forgotten Ark, Golden Wasteland',
+    start: +new Date('2024-09-29'),
+    end: +new Date('2024-09-29'),
+    time: timeShardAfternoonB,
+    imageUrl:
+      'https://static.wikia.nocookie.net/sky-children-of-the-light/images/0/01/SOShattering-radiant-shards.jpg/revision/latest/scale-to-width-down/193?cb=20220625005023',
+  },
+  {
+    id: uuid(),
+    name: '🔺 Red Shard in Treehouse, Hidden Forest',
+    start: +new Date('2024-09-27'),
+    end: +new Date('2024-09-27'),
+    time: timeShardAfternoonA,
+    imageUrl:
+      'https://static.wikia.nocookie.net/sky-children-of-the-light/images/0/01/SOShattering-radiant-shards.jpg/revision/latest/scale-to-width-down/193?cb=20220625005023',
+  },
+  {
+    id: uuid(),
+    name: '🔺 Red Shard in Jellyfish Cove, Vault of Knowledge',
+    start: +new Date('2024-09-25'),
+    end: +new Date('2024-09-25'),
+    time: timeShardEvening,
+    imageUrl:
+      'https://static.wikia.nocookie.net/sky-children-of-the-light/images/0/01/SOShattering-radiant-shards.jpg/revision/latest/scale-to-width-down/193?cb=20220625005023',
+  },
+  {
+    id: uuid(),
+    name: '🔺 Red Shard in Hermit Valley, Valley of Triumph',
+    start: +new Date('2024-09-23'),
+    end: +new Date('2024-09-23'),
+    time: timeShardAfternoonB,
+    imageUrl:
+      'https://static.wikia.nocookie.net/sky-children-of-the-light/images/0/01/SOShattering-radiant-shards.jpg/revision/latest/scale-to-width-down/193?cb=20220625005023',
+  },
+  {
+    id: uuid(),
+    name: '🔺 Red Shard in Bird Nest, Daylight Prarie',
+    start: +new Date('2024-09-21'),
+    end: +new Date('2024-09-21'),
+    time: timeShardAfternoonA,
+    imageUrl:
+      'https://static.wikia.nocookie.net/sky-children-of-the-light/images/0/01/SOShattering-radiant-shards.jpg/revision/latest/scale-to-width-down/193?cb=20220625005023',
+  },
+  {
+    id: uuid(),
+    name: '🔺 Red Shard in Elevated Clearing, Hidden Forest',
+    start: +new Date('2024-09-19'),
+    end: +new Date('2024-09-19'),
+    time: timeShardEvening,
+    imageUrl:
+      'https://static.wikia.nocookie.net/sky-children-of-the-light/images/0/01/SOShattering-radiant-shards.jpg/revision/latest/scale-to-width-down/193?cb=20220625005023',
+  },
+  {
+    id: uuid(),
+    name: '🔺 Red Shard in Elevated Clearing, Hidden Forest',
+    start: +new Date('2024-09-17'),
+    end: +new Date('2024-09-17'),
+    time: timeShardAfternoonB,
+    imageUrl:
+      'https://static.wikia.nocookie.net/sky-children-of-the-light/images/0/01/SOShattering-radiant-shards.jpg/revision/latest/scale-to-width-down/193?cb=20220625005023',
+  },
+  {
+    id: uuid(),
+    name: '🔺 Red Shard in Jellyfish Cove, Vault of Knowledge',
+    start: +new Date('2024-09-15'),
+    end: +new Date('2024-09-15'),
+    time: timeShardAfternoonA,
+    imageUrl:
+      'https://static.wikia.nocookie.net/sky-children-of-the-light/images/0/01/SOShattering-radiant-shards.jpg/revision/latest/scale-to-width-down/193?cb=20220625005023',
+  },
+  {
+    id: uuid(),
+    name: '🔺 Red Shard in Village of Dreams, Valley of Triumph',
+    start: +new Date('2024-09-13'),
+    end: +new Date('2024-09-13'),
+    time: timeShardEvening,
+    imageUrl:
+      'https://static.wikia.nocookie.net/sky-children-of-the-light/images/0/01/SOShattering-radiant-shards.jpg/revision/latest/scale-to-width-down/193?cb=20220625005023',
+  },
+  {
+    id: uuid(),
+    name: '🔺 Red Shard in Crab Field, Golden Wasteland',
+    start: +new Date('2024-09-09'),
+    end: +new Date('2024-09-09'),
+    time: timeShardAfternoonA,
+    imageUrl:
+      'https://static.wikia.nocookie.net/sky-children-of-the-light/images/0/01/SOShattering-radiant-shards.jpg/revision/latest/scale-to-width-down/193?cb=20220625005023',
+  },
+  {
+    id: uuid(),
+    name: '🔺 Red Shard in Forest Garden, Hidden Forest',
+    start: +new Date('2024-09-07'),
+    end: +new Date('2024-09-07'),
+    time: timeShardEvening,
+    imageUrl:
+      'https://static.wikia.nocookie.net/sky-children-of-the-light/images/0/01/SOShattering-radiant-shards.jpg/revision/latest/scale-to-width-down/193?cb=20220625005023',
+  },
+  {
+    id: uuid(),
+    name: '⚜ Season of Duets',
+    start: +new Date('2024-07-15'),
+    end: +new Date('2024-09-29'),
+    time: defaultTime,
+    imageUrl:
+      'https://img2.storyblok.com/fit-in/0x540/filters:format(webp)/f/108104/1920x1080/f9024e8f24/duets.jpg',
+  },
   {
     id: uuid(),
     name: 'Days of Sunlight',

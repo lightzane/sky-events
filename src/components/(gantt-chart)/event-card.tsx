@@ -116,7 +116,7 @@ export default ({ days, event, index, onClick }: Props) => {
                 )}></div>
               <img
                 // remove `.h-full.w-full` if don't want to stretch image, but it will be small
-                className={cn('h-full w-full', {
+                className={cn('h-full w-full absolute inset-0 -z-10 -top-5', {
                   'opacity-20':
                     DateUtil.isFutureOutsideRange(
                       event.start,

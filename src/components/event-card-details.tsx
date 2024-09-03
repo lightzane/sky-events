@@ -206,7 +206,7 @@ export default ({ event, onClose, onEdit, onDelete }: Props) => {
               )}
 
             {/* Actions */}
-            <div className='flex gap-x-3 opacity-0 group-hover:opacity-100 transition duration-300'>
+            <div className='flex justify-between opacity-0 group-hover:opacity-100 transition duration-300'>
               <button
                 type='button'
                 className='sm:opacity-30 hover:opacity-100'

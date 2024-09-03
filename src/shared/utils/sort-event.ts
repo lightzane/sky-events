@@ -8,14 +8,16 @@ export function sortEvents(events: Event[], leftOffset = +new Date()) {
     [...events]
       // Prioritize dates with near start and end
       .sort((a, b) => {
-        if (a.start === b.start) {
-          return a.end - b.end;
+        if (+DateUtil.resetTime(a.start) === +DateUtil.resetTime(b.start)) {
+          return +DateUtil.resetTime(a.end) - +DateUtil.resetTime(b.end);
         }
 
-        return a.start - b.start;
+        return +DateUtil.resetTime(a.start) - +DateUtil.resetTime(b.start);
       })
 
       // Exclude past events
-      .filter((e) => e.end >= leftOffset)
+      .filter(
+        (e) => +DateUtil.resetTime(e.end) >= +DateUtil.resetTime(leftOffset),
+      )
   );
 }

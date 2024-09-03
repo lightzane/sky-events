@@ -83,6 +83,9 @@ export default () => {
   }
 
   function handleExport() {
+    if (!dataInput.length) {
+      return;
+    }
     download(preYaml(dataInput));
   }
 
@@ -92,7 +95,7 @@ export default () => {
   }
 
   function handleViewRaw() {
-    if (eventDetails) {
+    if (eventDetails || !dataInput.length) {
       return;
     }
     setShowSettings(false);
@@ -203,6 +206,11 @@ export default () => {
     setCurrentDate(date);
   }
 
+  function handleClearData() {
+    localizedEvents([]);
+    setShowSettings(false);
+  }
+
   return (
     <div>
       <div className='md:my-5 md:m-5'>
@@ -217,6 +225,7 @@ export default () => {
           />
 
           <GanttChartSettings
+            dataInput={dataInput}
             show={showSettings}
             currentDateInput={currentDate}
             onClose={toggleSettings}
@@ -225,6 +234,7 @@ export default () => {
             onDataExport={handleExport}
             onViewRaw={handleViewRaw}
             onCurrentDate={handleChangeDate}
+            onClearData={handleClearData}
             toggleWeeks={(sd) => setSpanDays(sd)}
           />
 

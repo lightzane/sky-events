@@ -4,6 +4,7 @@ import {
   LucideDownload,
   LucideEye,
   LucideRefreshCcw,
+  LucideTrash2,
   LucideUpload,
 } from 'lucide-react';
 import { DateTime } from 'luxon';
@@ -14,6 +15,7 @@ import { Event } from '../data';
 import DatePicker from './date-picker';
 
 type Props = {
+  dataInput: Event[];
   show: boolean;
   currentDateInput?: Date;
   onClose?: () => void;
@@ -21,11 +23,13 @@ type Props = {
   onDataImport: () => void;
   onDataExport: () => void;
   onViewRaw: () => void;
+  onClearData: () => void;
   onCurrentDate: (date: Date) => void;
   toggleWeeks: (numOfDays: number) => void;
 };
 
 export default ({
+  dataInput,
   show,
   currentDateInput,
   onClose,
@@ -34,6 +38,7 @@ export default ({
   onDataImport,
   onDataExport,
   onViewRaw,
+  onClearData,
   toggleWeeks,
 }: Props) => {
   const [numOfDays, setNumOfDays] = useState(7);
@@ -157,20 +162,26 @@ export default ({
             <button
               type='button'
               onClick={onDataExport}
-              className='shadow-sm flex flex-1 items-center gap-x-1 text-sm px-3 py-1 rounded-lg transition ease-in-out duration-300 outline-none hover:bg-gray-700 text-white bg-gray-950'>
+              className={cn(
+                'shadow-sm flex flex-1 items-center gap-x-1 text-sm px-3 py-1 rounded-lg transition ease-in-out duration-300 outline-none hover:bg-gray-700 text-white bg-gray-950',
+                'disabled:opacity-30 disabled:bg-gray-500 disabled:pointer-events-none',
+              )}
+              disabled={!dataInput.length}>
               <LucideDownload className='w-4 h-4' />
               <span>Export</span>
             </button>
           </div>
 
           {/* View Raw */}
-          <button
-            type='button'
-            onClick={onViewRaw}
-            className='shadow-sm flex justify-center items-center gap-x-1 text-sm px-3 py-1 rounded-lg transition ease-in-out duration-300 outline-none bg-gradient-to-b from-white from-10% to-gray-100 ring-1 ring-gray-300 opacity-70 hover:opacity-100'>
-            <LucideEye className='w-4 h-4' />
-            <span>View Raw</span>
-          </button>
+          {!!dataInput.length && (
+            <button
+              type='button'
+              onClick={onViewRaw}
+              className='shadow-sm flex justify-center items-center gap-x-1 text-sm px-3 py-1 rounded-lg transition ease-in-out duration-300 outline-none bg-gradient-to-b from-white from-10% to-gray-100 ring-1 ring-gray-300 opacity-70 hover:opacity-100'>
+              <LucideEye className='w-4 h-4' />
+              <span>View Raw</span>
+            </button>
+          )}
 
           {/* Copy Template */}
           <button
@@ -192,6 +203,17 @@ export default ({
                 <span>Copied</span>
               </>
             )}
+          </button>
+
+          {/* Clear Data */}
+          <button
+            type='button'
+            onClick={onClearData}
+            className={cn(
+              'shadow-sm flex justify-center items-center gap-x-1 text-sm px-3 py-1 rounded-lg transition ease-in-out duration-300 outline-none bg-red-500 text-white opacity-70 hover:opacity-100',
+            )}>
+            <LucideTrash2 className='w-4 h-4' />
+            <span>Clear Data</span>
           </button>
         </div>
 

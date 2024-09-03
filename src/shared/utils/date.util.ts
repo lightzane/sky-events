@@ -1,7 +1,7 @@
 export class DateUtil {
-  static locales: Intl.LocalesArgument = 'en-US';
+  static readonly locales: Intl.LocalesArgument = 'en-US';
 
-  static months = [
+  static readonly months = [
     'Jan',
     'Feb',
     'Mar',
