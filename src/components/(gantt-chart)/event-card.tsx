@@ -98,7 +98,9 @@ export default ({ days, event, index, onClick }: Props) => {
                 DateUtil.isFutureOutsideRange(
                   event.start,
                   days[days.length - 1],
-                ) || DateUtil.isEqual(event.end, +days[0]),
+                ) ||
+                DateUtil.isEqual(event.end, +days[0]) ||
+                DateUtil.getTotalDays(event.start, event.end) === 0,
             })}>
             <div className='relative h-full w-full'>
               {/* Gradient Blur (middle) */}
@@ -121,7 +123,9 @@ export default ({ days, event, index, onClick }: Props) => {
                     DateUtil.isFutureOutsideRange(
                       event.start,
                       days[days.length - 1],
-                    ) || DateUtil.isEqual(event.end, +days[0]),
+                    ) ||
+                    DateUtil.isEqual(event.end, +days[0]) ||
+                    DateUtil.getTotalDays(event.start, event.end) === 0,
                 })}
                 src={event.imageUrl}
                 alt={event.name}
@@ -137,7 +141,9 @@ export default ({ days, event, index, onClick }: Props) => {
                   DateUtil.isFutureOutsideRange(
                     event.start,
                     days[days.length - 1],
-                  ) || DateUtil.isEqual(event.end, +days[0]),
+                  ) ||
+                  DateUtil.isEqual(event.end, +days[0]) ||
+                  DateUtil.getTotalDays(event.start, event.end) === 0,
                 'to-red-200': DateUtil.isEqual(event.end, +days[1]),
               },
             )}></div>

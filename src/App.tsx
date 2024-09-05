@@ -149,17 +149,24 @@ export default () => {
       if (
         TimeRegexUtil.timeZoneAbbr(time[whichTime].replace(/#.*$/, '').trim()) // remove comments if any
       ) {
+        const eventDate = new Date(event[whichTime]);
+
         validated = TimeZoneValidator.validate(
           time[whichTime],
-          new Date(event[whichTime]).getFullYear(),
+          eventDate.getFullYear(),
         );
+
+        const month = eventDate.toLocaleDateString('en-US', { month: 'short' });
+        const day = eventDate.getDate();
+        const monthDay = `${month} ${day}`;
 
         if (!hasError(validated)) {
           const iso = TimeZoneUtil.getLocalTime(
-            time[whichTime],
-            new Date(event[whichTime]),
+            `${monthDay}, ${time[whichTime]}`,
+            eventDate,
             true,
           );
+
           event[whichTime] = +new Date(iso);
         } else {
           // @ts-ignore
