@@ -15,6 +15,8 @@ type Props = {
   settingsClick?: () => void;
   spanDaysInput?: number;
   currentDate?: Date;
+  onPrevDayClick: () => void;
+  onNextDayClick: () => void;
   onEventClick: (event: Event) => void;
 };
 
@@ -25,6 +27,8 @@ export default ({
   onEventClick,
   spanDaysInput = 7, // Default: 1 week
   currentDate = new Date(),
+  onPrevDayClick,
+  onNextDayClick,
 }: Props) => {
   // Date range to be displayed on the timeline
   const [days, setDays] = useState<Date[]>(
@@ -74,7 +78,11 @@ export default ({
           // 'overflow-auto', // Breaks the "sticky" of days headers
         )}>
         {/* Days Headers */}
-        <DaysHeaders days={days} />
+        <DaysHeaders
+          days={days}
+          onNextDayClick={onNextDayClick}
+          onPrevDayClick={onPrevDayClick}
+        />
 
         {/* Events */}
         {sortedEvents.map((event, index) => (

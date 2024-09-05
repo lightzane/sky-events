@@ -218,6 +218,17 @@ export default () => {
     setShowSettings(false);
   }
 
+  function moveCurrentDate(where: 'prev' | 'next') {
+    if (where === 'prev') {
+      setCurrentDate((c) => new Date(c.setDate(c.getDate() - 1)));
+    }
+
+    // next
+    else if (where === 'next') {
+      setCurrentDate((c) => new Date(c.setDate(c.getDate() + 1)));
+    }
+  }
+
   return (
     <div>
       <div className='md:my-5 md:m-5'>
@@ -228,6 +239,8 @@ export default () => {
             settingsClick={toggleSettings}
             spanDaysInput={spanDays}
             currentDate={currentDate}
+            onPrevDayClick={() => moveCurrentDate('prev')}
+            onNextDayClick={() => moveCurrentDate('next')}
             onEventClick={setEventDetails}
           />
 
