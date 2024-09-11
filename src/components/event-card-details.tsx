@@ -97,8 +97,8 @@ export default ({ event, onClose, onEdit, onDelete }: Props) => {
           </>
         ) : (
           <>
-            {DateTime.fromMillis(event.end).toFormat('LLL L, cccc t')}
-            {/* LLL L, cccc t = Sep 9, Monday 12:00 AM */}
+            {DateTime.fromMillis(event.end).toFormat('LLL d, cccc t')}
+            {/* LLL d, cccc t = Sep 9, Monday 12:00 AM */}
           </>
         )}
       </div>
