@@ -161,7 +161,7 @@ export const FEATURED_EVENTS: Event[] = [
     id: uuid(),
     name: 'Days of Sunlight',
     start: +new Date('2024-08-26'),
-    end: +new Date('9/8/2024'),
+    end: +new Date('9/12/2024'),
     time: defaultTime,
     imageUrl:
       'https://d2duuy9yo5pldo.cloudfront.net/thatgamecompany/224a70ea-0f87-48e7-8b56-6ec15a39befe.png',
@@ -197,7 +197,9 @@ export const FEATURED_EVENTS: Event[] = [
     id: uuid(),
     name: 'Double Light',
     start: +new Date('9/9/2024'),
-    end: +new Date('9/15/2024'),
+    end: +new Date('9/29/2024'),
     time: defaultTime,
+    imageUrl:
+      'https://cdn.discordapp.com/attachments/575768778789617674/1282784517811343404/Those_Candle_Cakes_Are_Deliciously_Brighter.png?ex=66e297ee&is=66e1466e&hm=77f0ebb2f21adf1dc89bdb1192f4ec3460b678eef2b39fd8783e2c3be7bdcc4e&',
   },
 ];
