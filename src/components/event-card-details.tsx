@@ -115,10 +115,10 @@ export default ({ event, onClose, onEdit, onDelete }: Props) => {
       }}>
       {event && (
         <>
-          {/* Set backgroudn image */}
+          {/* Set background image */}
           {event.imageUrl && (
             <div className='absolute inset-0 rounded-lg overflow-hidden pointer-events-none'>
-              <img src={event.imageUrl} className='opacity-10' />
+              <img alt='' src={event.imageUrl} className='opacity-10' />
             </div>
           )}
 

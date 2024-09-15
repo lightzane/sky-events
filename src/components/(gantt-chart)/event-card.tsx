@@ -93,15 +93,19 @@ export default ({ days, event, index, onClick }: Props) => {
       {event.imageUrl && (
         <>
           <div
-            className={cn('absolute top-0 left-0 w-[45%] h-[200%]', {
-              'w-full':
-                DateUtil.isFutureOutsideRange(
-                  event.start,
-                  days[days.length - 1],
-                ) ||
-                DateUtil.isEqual(event.end, +days[0]) ||
-                DateUtil.getTotalDays(event.start, event.end) === 0,
-            })}>
+            className={cn(
+              'absolute top-0 left-0 w-[45%] h-[200%]',
+              'min-w-96',
+              {
+                'w-full':
+                  DateUtil.isFutureOutsideRange(
+                    event.start,
+                    days[days.length - 1],
+                  ) ||
+                  DateUtil.isEqual(event.end, +days[0]) ||
+                  DateUtil.getTotalDays(event.start, event.end) === 0,
+              },
+            )}>
             <div className='relative h-full w-full'>
               {/* Gradient Blur (middle) */}
               <div
@@ -135,7 +139,7 @@ export default ({ days, event, index, onClick }: Props) => {
           {/* Gradient Blur (whole) */}
           <div
             className={cn(
-              'absolute top-0 left-0 w-[60%] h-full bg-gradient-to-r from-transparent to-green-200',
+              'absolute top-0 left-0 w-[60%] min-w-96 h-full bg-gradient-to-r from-transparent to-green-200',
               {
                 'opacity-0':
                   DateUtil.isFutureOutsideRange(
