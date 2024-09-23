@@ -51,7 +51,6 @@ export default ({ event, onClose, onEdit, onDelete }: Props) => {
 
       /** Difference in milliseconds */
       const diff = event.end - now;
-      console.log(diff, 'diff');
 
       // Timeout
       if (diff < 0) {
@@ -119,7 +118,11 @@ export default ({ event, onClose, onEdit, onDelete }: Props) => {
           {/* Set background image */}
           {event.imageUrl && (
             <div className='absolute inset-0 rounded-lg overflow-hidden pointer-events-none'>
-              <img alt='' src={event.imageUrl} className='opacity-10' />
+              <img
+                alt=''
+                src={event.imageUrl}
+                className='opacity-10 w-full h-full'
+              />
             </div>
           )}
 

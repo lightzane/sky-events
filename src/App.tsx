@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import './App.css';
 import GanttChart from './components/(gantt-chart)/gantt-chart';
+import AddEvent from './components/add-event';
 import EventCardDetails from './components/event-card-details';
 import GanttChartSettings from './components/gantt-chart-settings';
+import ModalOverlay from './components/modal-overlay';
 import RawDataDetails from './components/raw-data-details';
 import { Event, FEATURED_EVENTS } from './data';
 import {
@@ -14,8 +16,6 @@ import {
   upload,
 } from './shared/utils';
 import { TimeZoneValidator } from './shared/validators';
-import ModalOverlay from './components/modal-overlay';
-import AddEvent from './components/add-event';
 
 export default () => {
   const [showSettings, setShowSettings] = useState(false);

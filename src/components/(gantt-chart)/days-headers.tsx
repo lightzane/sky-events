@@ -24,11 +24,11 @@ export default ({ days, onPrevDayClick, onNextDayClick }: Props) => {
           key={DateUtil.getDayName(day) + DateUtil.formatDateShort(day)}
           className={cn(
             'pointer-events-none select-none',
-            'sticky top-0 z-20 rounded-md transition-all duration-300 ease-in-out',
+            'sticky top-0 z-20 transition-all duration-300 ease-in-out',
             'bg-sky-200 text-sky-950 p-3 border-l-2 border-l-sky-100 min-w-14',
             { 'bg-sky-100': DateUtil.isToday(day) },
             {
-              'hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 z-30 cursor-pointer':
+              'hover:rounded-md hover:ring-2 hover:ring-offset-2 hover:ring-blue-500 z-30 cursor-pointer':
                 index === 0 || index === days.length - 1, // first and last column (for prev and next function)
             },
             {

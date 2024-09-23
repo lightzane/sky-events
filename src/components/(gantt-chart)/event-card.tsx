@@ -123,13 +123,13 @@ export default ({ days, event, index, onClick }: Props) => {
               <img
                 // remove `.h-full.w-full` if don't want to stretch image, but it will be small
                 className={cn('h-full w-full absolute inset-0 -z-10 -top-5', {
-                  'opacity-20':
+                  'opacity-30':
                     DateUtil.isFutureOutsideRange(
                       event.start,
                       days[days.length - 1],
                     ) ||
                     DateUtil.isEqual(event.end, +days[0]) ||
-                    DateUtil.getTotalDays(event.start, event.end) === 0,
+                    DateUtil.getTotalDays(event.start, event.end) < 2,
                 })}
                 src={event.imageUrl}
                 alt={event.name}
@@ -162,7 +162,9 @@ export default ({ days, event, index, onClick }: Props) => {
             days[days.length - 1],
           ),
         })}>
-        <span className='font-semibold'>{event.name}</span>
+        <span className='font-semibold'>
+          {event.name.replace(/Red Shard in /g, '')}
+        </span>
 
         {/* @ts-expect-error: force-field error */}
         {!event.error ? (
