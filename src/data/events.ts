@@ -30,22 +30,22 @@ const defaultTime = {
   end: '11:59pm PDT',
 };
 
-/** `02:28am PDT >> 09:20am PHT` */
+/** `02:28am PDT >> 04:20pm PDT` */
 const timeShardAfternoonA = {
   start: '02:28am PDT',
-  end: '09:20am PHT',
+  end: '04:20pm PDT',
 };
 
-/** `03:38am PDT >> 10:30am PHT` */
+/** `03:38am PDT >> 07:30pm PDT` */
 const timeShardAfternoonB = {
   start: '03:38am PDT',
-  end: '10:30am PHT',
+  end: '07:30pm PDT',
 };
 
-/** `07:48am PDT >> 02:40pm PHT` */
+/** `07:48am PDT >> 11:40pm PDT` */
 const timeShardEvening = {
   start: '07:48am PDT',
-  end: '02:40pm PHT',
+  end: '11:40pm PDT',
 };
 
 import imgDoubleLight from '../assets/Double-candle-event-September-2024.webp';

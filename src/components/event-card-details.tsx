@@ -51,6 +51,7 @@ export default ({ event, onClose, onEdit, onDelete }: Props) => {
 
       /** Difference in milliseconds */
       const diff = event.end - now;
+      console.log(diff, 'diff');
 
       // Timeout
       if (diff < 0) {
@@ -134,7 +135,6 @@ export default ({ event, onClose, onEdit, onDelete }: Props) => {
               </span>
               <span className='font-semibold text-xl'>{event.name}</span>
             </div>
-
             {/* Event ended */}
             {(days < 0 || hours < 0 || minutes < 0) && (
               <div className='flex flex-col gap-1 p-5 rounded-md bg-emerald-100'>
@@ -144,7 +144,6 @@ export default ({ event, onClose, onEdit, onDelete }: Props) => {
                 <DateEndComponent />
               </div>
             )}
-
             {/* On-going event + countdown */}
             {(!DateUtil.isFutureOutsideRange(event.start, new Date()) ||
               (event.end > now && now > event.start)) &&
@@ -184,27 +183,32 @@ export default ({ event, onClose, onEdit, onDelete }: Props) => {
                   <DateEndComponent />
                 </div>
               )}
-
             {/* Future event */}
-            {DateUtil.isFutureOutsideRange(event.start, new Date()) &&
-              !DateUtil.isEqual(event.start, new Date()) && (
-                <div className='flex flex-col gap-1 p-5 rounded-md bg-purple-100'>
-                  <div className='text-xs'>STARTS ON</div>
-                  <div className='flex items-end gap-x-1'>
-                    <span className='text-3xl'>
-                      {DateTime.fromMillis(event.start).toFormat('dd')}
-                    </span>
-                    <span className='uppercase'>
-                      {DateTime.fromMillis(event.start).toFormat('MMMM')}
-                    </span>
-                  </div>
-                  <div className='text-gray-500'>
-                    {DateTime.fromMillis(event.start).toFormat('cccc t')}
-                    {/* cccc t = Monday 12:00 AM */}
-                  </div>
+            {now < event.start && (
+              <div className='flex flex-col gap-1 p-5 rounded-md bg-purple-100'>
+                <div className='text-xs'>
+                  STARTS {!DateUtil.isToday(event.start) && 'ON'}
                 </div>
-              )}
-
+                <div className='flex items-end gap-x-1'>
+                  {DateUtil.isToday(event.start) ? (
+                    <span className='text-3xl'>Today</span>
+                  ) : (
+                    <>
+                      <span className='text-3xl'>
+                        {DateTime.fromMillis(event.start).toFormat('dd')}
+                      </span>
+                      <span className='uppercase'>
+                        {DateTime.fromMillis(event.start).toFormat('MMMM')}
+                      </span>
+                    </>
+                  )}
+                </div>
+                <div className='text-gray-500'>
+                  {DateTime.fromMillis(event.start).toFormat('cccc t')}
+                  {/* cccc t = Monday 12:00 AM */}
+                </div>
+              </div>
+            )}
             {/* Actions */}
             <div className='flex justify-between opacity-0 group-hover:opacity-100 transition duration-300'>
               <button
