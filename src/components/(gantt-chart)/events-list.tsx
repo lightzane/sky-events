@@ -1,15 +1,22 @@
-import { LucidePlus, LucideSettings } from 'lucide-react';
+import { LucideFilter, LucidePlus, LucideSettings } from 'lucide-react';
 import { Event } from '../../data';
 import { cn, DateUtil } from '../../shared/utils';
 
 type Props = {
   events: Event[];
   addClick?: () => void;
+  filterClick?: () => void;
   settingsClick?: () => void;
   onEventClick: (event: Event) => void;
 };
 
-export default ({ events, settingsClick, addClick, onEventClick }: Props) => {
+export default ({
+  events,
+  addClick,
+  filterClick,
+  settingsClick,
+  onEventClick,
+}: Props) => {
   return (
     <>
       <div
@@ -29,6 +36,20 @@ export default ({ events, settingsClick, addClick, onEventClick }: Props) => {
                 </span>
                 <span className='absolute inset-0 p-1 opacity-20 group-hover:blur-sm group-hover:opacity-70 transition-all duration-300'>
                   <LucidePlus />
+                </span>
+              </button>
+            )}
+
+            {!!filterClick && (
+              <button
+                onClick={filterClick}
+                type='button'
+                className='group p-1 rounded-full relative transition-all duration-300'>
+                <span>
+                  <LucideFilter />
+                </span>
+                <span className='absolute inset-0 p-1 opacity-20 group-hover:blur-sm group-hover:opacity-70 transition-all duration-300'>
+                  <LucideFilter />
                 </span>
               </button>
             )}

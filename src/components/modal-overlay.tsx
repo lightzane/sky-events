@@ -53,6 +53,7 @@ export default ({
           <div
             className={cn(
               'relative rounded-lg w-full max-w-xl bg-white shadow-2xl cursor-default p-3',
+              'max-h-[70svh] overflow-y-auto',
               'transition-all ease-in-out duration-300',
               {
                 'opacity-0 translate-y-20': !showModal,

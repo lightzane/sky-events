@@ -34,11 +34,12 @@ export function download<T>(globalData: T, filename = 'events.yaml') {
 
 /** Transforms the data (i.e. date format in `yaml`) before converting to `yaml` */
 export function preYaml(dataInput: Event[]) {
-  return dataInput.map(({ name, start, end, time, imageUrl }) => ({
+  return dataInput.map(({ name, start, end, time, imageUrl, tags }) => ({
     name,
     start: DateUtil.formatDateLong(start),
     end: DateUtil.formatDateLong(end),
     time,
+    tags,
     imageUrl,
   }));
 }
@@ -64,7 +65,7 @@ export function toYaml(events: Event[]): string {
     return value;
   };
 
-  events.forEach(({ name, start, end, time, imageUrl }) => {
+  events.forEach(({ name, start, end, time, imageUrl, tags }) => {
     // Special characters in name, then wrap in double quotes
     name = wrapQuotes(name);
 
@@ -89,6 +90,15 @@ export function toYaml(events: Event[]): string {
         yamlStr += `\n    end: ${time.end}`;
       }
 
+      yamlStr += `\n`;
+    }
+
+    // * Tags
+    if (tags?.length) {
+      yamlStr += `  tags:`;
+      tags.forEach((tag) => {
+        yamlStr += `\n    - ${tag}`;
+      });
       yamlStr += `\n`;
     }
 

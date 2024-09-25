@@ -16,6 +16,7 @@ import {
   upload,
 } from './shared/utils';
 import { TimeZoneValidator } from './shared/validators';
+import Filter from './components/filter';
 
 export default () => {
   const [showSettings, setShowSettings] = useState(false);
@@ -26,6 +27,8 @@ export default () => {
   const [eventDetails, setEventDetails] = useState<Event>(); // event to view details
   const [viewRaw, setViewRaw] = useState(false);
   const [showAddEvent, setShowAddEvent] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
+  const [filters, setFilters] = useState<string[]>([]);
   const [eventAdded, setEventAdded] = useState(false);
   const [additionalImport, setAdditionalImport] = useState(false);
   const [editEvent, setEditEvent] = useState<Event>();
@@ -235,7 +238,9 @@ export default () => {
         <div className='flex flex-col gap-y-10'>
           <GanttChart
             events={localized}
+            filters={filters}
             addClick={() => setShowAddEvent(true)}
+            filterClick={() => setShowFilter(true)}
             settingsClick={toggleSettings}
             spanDaysInput={spanDays}
             currentDate={currentDate}
@@ -330,12 +335,22 @@ export default () => {
                 }
                 // New Event
                 else {
-                  newlist.push(event);
+                  newlist.unshift(event);
                 }
 
                 localizedEvents(newlist);
                 setShowAddEvent(false);
               }}
+            />
+          </ModalOverlay>
+
+          {/* Filter */}
+          <ModalOverlay
+            showModal={showFilter}
+            onClose={() => setShowFilter(false)}>
+            <Filter
+              events={localized}
+              onTagsChanged={(tags) => setFilters(tags)}
             />
           </ModalOverlay>
         </div>

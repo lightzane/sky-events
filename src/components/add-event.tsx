@@ -3,6 +3,7 @@ import {
   LucideClock,
   LucidePlus,
   LucideUpload,
+  LucideX,
 } from 'lucide-react';
 import { DateTime } from 'luxon';
 import { useEffect, useRef, useState } from 'react';
@@ -39,18 +40,24 @@ export default ({
 
   const [eventName, setEventName] = useState('');
 
+  const [tags, setTags] = useState<string[]>([]);
+
   const eventNameRef = useRef<HTMLInputElement>(null);
   const imageUrlRef = useRef<HTMLInputElement>(null);
   const startDateRef = useRef<HTMLButtonElement>(null);
   const endDateRef = useRef<HTMLButtonElement>(null);
   const startTimeRef = useRef<HTMLInputElement>(null);
   const endTimeRef = useRef<HTMLInputElement>(null);
+  const tagRef = useRef<HTMLInputElement>(null);
 
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     if (editEvent) {
       populateFields(editEvent);
+      if (editEvent.tags?.length) {
+        setTags(editEvent.tags);
+      }
     } else {
       reset();
     }
@@ -67,6 +74,7 @@ export default ({
     }
   }, [startDate]);
 
+  // * Detect change for submitted
   useEffect(() => {
     if (submitted) {
       const id = editEvent ? editEvent.id : uuid();
@@ -89,6 +97,10 @@ export default ({
       }
 
       event.imageUrl = imageUrlRef.current?.value.trim() || undefined;
+
+      if (tags.length) {
+        event.tags = [...tags];
+      }
 
       onSubmit(event, !!editEvent);
       reset();
@@ -138,6 +150,7 @@ export default ({
     setEndTime('');
     setMin(undefined);
     setEventName('');
+    setTags([]);
 
     if (eventNameRef.current) {
       eventNameRef.current.value = '';
@@ -222,7 +235,7 @@ export default ({
               type='text'
               name='event-name'
               id='event-name'
-              className='block w-full rounded-md border-0 py-1.5 pr-20 text-blue-500 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:leading-6'
+              className='block w-full rounded-md border-0 py-1.5 text-blue-500 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:leading-6'
               maxLength={20}
               onKeyUp={(e) => setEventName(e.currentTarget.value.trim())}
             />
@@ -360,12 +373,55 @@ export default ({
         </div>
         {/* End datetime */}
 
+        {/* Tags */}
+        <div>
+          <label
+            htmlFor='tags'
+            className='block text-sm font-medium leading-6 text-gray-900'>
+            Tags <span className='text-gray-400 font-normal'>(optional)</span>
+          </label>
+          <div className='relative mt-2 rounded-md shadow-sm'>
+            <div className='rounded-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-blue-600 sm:text-sm sm:leading-6'>
+              <div className='flex flex-wrap mx-1 gap-x-1 items-center'>
+                {tags.map((tag) => (
+                  <button
+                    key={tag}
+                    className='flex animate-enter gap-x-1 rounded-3xl p-1.5 px-3 text-sm sm:text-xs font-semibold bg-gray-100 shadow-sm'
+                    onClick={() => {
+                      setTags((current) => current.filter((f) => f !== tag));
+                    }}>
+                    <LucideX size={15} className='text-gray-400' />
+                    <span>{tag}</span>
+                  </button>
+                ))}
+                <input
+                  ref={tagRef}
+                  type='text'
+                  name='tags'
+                  id='tags'
+                  className='placeholder:text-gray-400 border-none outline-none focus:outline-none ring-0 focus:ring-0 text-sm sm:text-xs'
+                  placeholder='Add tags...'
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      const value = e.currentTarget.value.trim();
+                      setTags((current) => current.concat(value));
+                      e.currentTarget.value = '';
+                    }
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        {/* end: Tags */}
+
         {/* Image URL */}
         <div>
           <label
             htmlFor='image-url'
             className='block text-sm font-medium leading-6 text-gray-900'>
-            Image URL (optional)
+            Image URL{' '}
+            <span className='text-gray-400 font-normal'>(optional)</span>
           </label>
           <div className='relative mt-2 rounded-md shadow-sm'>
             <input
@@ -402,6 +458,8 @@ export default ({
           defaultDate={defaultDate}
         />
       </ModalOverlay>
+
+      {/* Tags */}
     </div>
   );
 };

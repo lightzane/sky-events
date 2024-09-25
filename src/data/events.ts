@@ -9,6 +9,7 @@ export type Event = {
   name: string;
   start: number;
   end: number;
+  tags?: string[];
   time?: Time;
   imageUrl?: string;
 };
@@ -34,6 +35,9 @@ const defaultTime = {
   end: '11:59pm PDT',
 };
 
+// * =============================================================================
+// *    Featured Events
+// * =============================================================================
 export const FEATURED_EVENTS: Event[] = [
   {
     id: uuid(),
@@ -90,6 +94,9 @@ export const FEATURED_EVENTS: Event[] = [
   },
 ];
 
+// * =============================================================================
+// *    Predict and Shards events
+// * =============================================================================
 const shard = new Shards();
 
 const today = new Date();
@@ -109,6 +116,7 @@ for (let i = 0; i < 25; i++) {
       start: date,
       end: date,
       time: shardsInfo.time,
+      tags: ['Red Shards'],
       imageUrl:
         'https://static.wikia.nocookie.net/sky-children-of-the-light/images/6/6c/Village_of_Dreams_%28Guide%29.jpg',
     });

@@ -11,7 +11,9 @@ import './gantt-chart.css';
 
 type Props = {
   events: Event[];
+  filters: string[];
   addClick?: () => void;
+  filterClick?: () => void;
   settingsClick?: () => void;
   spanDaysInput?: number;
   currentDate?: Date;
@@ -22,7 +24,9 @@ type Props = {
 
 export default ({
   events,
+  filters,
   addClick,
+  filterClick,
   settingsClick,
   onEventClick,
   spanDaysInput = 7, // Default: 1 week
@@ -51,8 +55,26 @@ export default ({
   }, [spanDaysInput]);
 
   useEffect(() => {
-    setSortedEvents(sortEvents(events, +days[0]));
-  }, [events]);
+    if (!filters.length) {
+      setSortedEvents(sortEvents(events, +days[0]));
+    }
+
+    const filteredEvents = events.filter((event) => {
+      if (!event.tags?.length) {
+        return true;
+      }
+
+      for (const filter of filters) {
+        if (event.tags.includes(filter)) {
+          return true;
+        }
+      }
+
+      return false;
+    });
+
+    setSortedEvents(sortEvents(filteredEvents, +days[0]));
+  }, [events, filters]);
 
   useEffect(() => {
     setDays(DateUtil.getSpanDays(spanDaysInput, new Date(currentDate)));
@@ -66,6 +88,7 @@ export default ({
         <EventsList
           events={sortedEvents}
           addClick={addClick}
+          filterClick={filterClick}
           settingsClick={settingsClick}
           onEventClick={onEventClick}
         />
