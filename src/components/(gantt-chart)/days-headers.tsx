@@ -1,3 +1,4 @@
+import { LucideChevronLeft, LucideChevronRight } from 'lucide-react';
 import { cn, DateUtil } from '../../shared/utils';
 
 type Props = {
@@ -36,11 +37,22 @@ export default ({ days, onPrevDayClick, onNextDayClick }: Props) => {
             },
           )}
           onClick={() => handleDayClick(index)}>
-          <div className='flex flex-col text-sm'>
-            <span>{DateUtil.getDayName(day)}</span>
-            <span className='font-semibold'>
-              {DateUtil.formatDateShort(day)}
-            </span>
+          <div className='flex gap-x-1 items-center group'>
+            {index === 0 && (
+              <LucideChevronLeft className='text-blue-300 group-hover:text-blue-500 transition duration-300 shrink-0 hidden md:block absolute left-0 inset-y-0 h-full' />
+            )}
+            <div
+              className={cn('flex flex-col text-sm', {
+                'ml-3.5': index === 0,
+              })}>
+              <span>{DateUtil.getDayName(day)}</span>
+              <span className='font-semibold'>
+                {DateUtil.formatDateShort(day)}
+              </span>
+            </div>
+            {index === days.length - 1 && (
+              <LucideChevronRight className='text-blue-300 group-hover:text-blue-500 transition duration-300 shrink-0 hidden md:block absolute right-3 inset-y-0 h-full' />
+            )}
           </div>
         </div>
       ))}
