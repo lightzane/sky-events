@@ -1,3 +1,6 @@
+# !IMPORTANT!
+# Please remove optional field entire line if no value is provided
+
 events:
   - name:
     start: 04-OCT-2024
