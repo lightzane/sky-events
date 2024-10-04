@@ -8,3 +8,6 @@ events:
     time: # Optional
       start: 12am PDT
       end: 11:59pm PDT
+  - name: Another event is here
+    start: 04-OCT-2024
+    end: 04-OCT-2024 # Optional. Defaults to start
