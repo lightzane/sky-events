@@ -79,7 +79,8 @@ newData.events.forEach((data) => {
 console.log(`Registering events:`, JSON.stringify(newData.events, null, 2));
 
 // Combine existing and new events
-const updatedEvents = [...newData.events, ...existingEvents];
+// const updatedEvents = [...newData.events, ...existingEvents];
+const updatedEvents = [...newData.events]; // the newData contains the existing events, so let's not duplicate
 
 // Construct the updated content for FEATURED_EVENTS
 const newEventsContentStr = JSON.stringify(updatedEvents, null, 2);
