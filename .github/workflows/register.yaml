@@ -48,6 +48,7 @@ jobs:
           if yq e '.events[] | select(.[] == null)' registration.yaml | grep -q .; then
             echo "Error: One or more items have a null field"
             echo "If the field is optional, then either remove the field completely or provide value"
+            echo "Please refer to this file: https://github.com/lightzane/sky-events/blob/refs/heads/register_events/registration.yaml"
             exit 1
           else
             echo "All events have valid names."
