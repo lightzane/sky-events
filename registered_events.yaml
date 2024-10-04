@@ -1,3 +1,6 @@
+# !IMPORTANT!
+# DO NOT directly modify to register events on this file. Please go to registration.yaml and create PR.
+
 events:
   - name: Sample Event
     start: 04-OCT-2024
