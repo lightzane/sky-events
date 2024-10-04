@@ -106,6 +106,6 @@ jobs:
             echo "No changes to commit."
           fi
 
-  redeploy:
+  rebuild:
     needs: register
-    uses: lightzane/sky-events/.github/workflows/ci.yaml@main
+    uses: lightzane/sky-events/.github/workflows/build.yaml@main
