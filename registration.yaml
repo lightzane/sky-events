@@ -1,7 +1,11 @@
+# !IMPORTANT!
+# Please remove optional field entire line if no value is provided
+
 events:
-  - name: Sample Event
+  - name:
     start: 04-OCT-2024
     end: 04-OCT-2024 # Optional. Defaults to start
-    time: # Optional
-      start: 12am PDT
-      end: 11:59pm PDT
+    time:
+      start: 12am PDT # Optional
+      end: 11:59pm PDT # Optional
+    imageUrl: # Optional
