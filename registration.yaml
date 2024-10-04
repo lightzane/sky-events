@@ -5,4 +5,3 @@ events:
     time: # Optional
       start: 12am PDT
       end: 11:59pm PDT
-    imageUrl: # Optional
