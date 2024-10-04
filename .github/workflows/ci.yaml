@@ -65,6 +65,7 @@ jobs:
       # Must check-in changes for Cloudflar pages to pickup the latest files updated
       - name: Check-in main
         run: |
+          rm -rf reg
           if [ -n "$(git status --porcelain)" ]; then
           # Check if there are any changes (-n = means non-zero length; -z = means zero-length)
             git config user.name "GitHub Actions"
