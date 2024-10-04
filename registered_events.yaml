@@ -2,6 +2,8 @@
 # DO NOT directly modify to register events on this file. Please go to registration.yaml and create PR.
 
 events:
+  - name: Clarity
+    start: 05-OCT-2024
   - name: Go go go
     start: 09-OCT-2024
   - name: Sample Event
