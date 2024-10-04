@@ -1,14 +1,4 @@
 # !IMPORTANT!
 # DO NOT directly modify to register events on this file. Please go to registration.yaml and create PR.
 
-events:
-  - name: GG
-    start: 04-OCT-2024
-    end: 04-OCT-2024 # Optional. Defaults to start
-    time:
-      start: 12am PDT # Optional
-      end: 11:59pm PDT # Optional
-  - name: Test
-    start: 06-OCT-2024
-    time:
-      start: 12am PDT
+events: []
