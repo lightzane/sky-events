@@ -109,3 +109,5 @@ jobs:
   rebuild:
     needs: register
     uses: lightzane/sky-events/.github/workflows/build.yaml@main
+    secrets:
+      token: ${{ secrets.GH_TOKEN }}
