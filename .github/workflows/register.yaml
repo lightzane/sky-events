@@ -45,6 +45,8 @@ jobs:
 
       - name: Check-in
         run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
           git add registration.yaml
           git commit -m "🤖 Cleanup"
           git push
