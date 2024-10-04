@@ -1,0 +1,45 @@
+name: Register Events
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: register_events
+
+jobs:
+  # Single deploy job since we're just deploying
+  register:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this branch
+        uses: actions/checkout@v4
+        with:
+          ref: register_events
+          path: reg
+
+      - name: Checkout main branch
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          path: main
+
+      - name: Test
+        run: |
+          echo "Check main"
+          ls main
+          echo "Check reg"
+          ls reg
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          working-directory: reg
+
+      - name: Install dependencies
+        run: npm ci
+        working-directory: reg
+
+      - name: Read registration yaml
+        run: |
+          yq r -r '.events[0].name' reg/registered_events.yaml

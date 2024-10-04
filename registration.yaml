@@ -1,0 +1,9 @@
+events:
+  # The name of the event
+  - name: Lessons
+    start: 10-OCT-2024
+    end: 10-OCT-2024 # Optional. Defaults to start
+    # time:
+    #   start: 12am PDT
+    #   end: 11:59pm PDT
+    # imageUrl:
