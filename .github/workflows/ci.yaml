@@ -56,7 +56,7 @@ jobs:
       - name: Register events
         working-directory: reg
         run: |
-          npm start -- reg/registered_events.yaml ../src/data/registered_events.ts
+          npm start -- ./registered_events.yaml ../src/data/registered_events.ts
 
       - name: Build
         run: npm run build
