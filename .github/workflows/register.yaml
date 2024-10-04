@@ -42,6 +42,23 @@ jobs:
         run: |
           yq -o=json '.events' registration.yaml
 
+      - name: Validate registration
+        run: |
+          # Load the YAML file and check for null names
+          if yq e '.events[] | select(.[] == null)' registration.yaml | grep -q .; then
+            echo "Error: One or more items have a null field"
+            echo "If the field is optional, then either remove the field completely or provide value"
+            exit 1
+          else
+            echo "All events have valid names."
+          fi
+
+          # select(.name == null) filters out only those items where the name is null.
+          # select(.[] == null) filters out only those items where any field is null.
+
+          # The grep -q . checks if there is any output from the previous command. 
+          # If there is, it means at least one item has a null name.
+
       - name: Register events
         run: |
           yq e '.events += load("registration.yaml").events' -i registered_events.yaml
