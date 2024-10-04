@@ -14,7 +14,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: register_events
-          path: reg
 
       - name: Checkout main branch
         uses: actions/checkout@v4
@@ -27,18 +26,16 @@ jobs:
           echo "Check main"
           ls main
           echo "Check reg"
-          ls reg
+          ls
 
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-          working-directory: reg
 
       - name: Install dependencies
         run: npm ci
-        working-directory: reg
 
       - name: Read registration yaml
         run: |
