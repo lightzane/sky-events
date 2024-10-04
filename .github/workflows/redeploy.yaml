@@ -1,6 +1,8 @@
 name: Redeploy
 
 on:
+  push:
+    branches: register_events
   workflow_dispatch:
 
 jobs:
