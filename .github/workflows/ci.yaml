@@ -1,4 +1,4 @@
-name: Registration of other events
+name: Register other events and build
 
 on:
   # Runs on pushes targeting the default branch
