@@ -2,7 +2,7 @@
 
 This is used to simply register events and lets the Github workflow to include it and redeploy the app.
 
-**Please only update the `registration.yaml`**
+**Please create PR and only update the `registration.yaml`**
 
 ## For commiting changes directly in this branch
 
