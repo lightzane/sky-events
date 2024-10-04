@@ -41,14 +41,43 @@ jobs:
         run: |
           yq -r '.events[0].name' registration.yaml
 
+      - name: Get Current Date
+        run: |
+          current_date=$(date +"%d-%b-%Y" | tr '[:lower:]' '[:upper:]')
+
+          # %d = Day of month (01 to 31)
+          # %b = Abbreviated month name (Jan to Dec)
+          # %Y = Year in four digits
+
+          # | tr '[:lower:]' '[:upper:]'
+          # This pipes the output to tr, which translates lowercase letters to uppercase,
+          # converting the month abbreviation from Oct to OCT.
+
+          # Example Output: 
+          # 04-OCT-2024
+
+          # N=10  # Replace 10 with the number of days you want to add
+          # date -d "+$N days" +"%d-%b-%Y" | tr '[:lower:]' '[:upper:]'
+
+          echo CURRENT_DATE=$current_date >> $GITHUB_ENV
+
       - name: Cleanup
         run: |
+          echo "Today is $CURRENT_DATE"
+
+          # Update template.yaml
+          yq e '.events[0].start = $CURRENT_DATE' -i template.yaml
+          yq e '.events[0].end = $CURRENT_DATE' -i template.yaml
+
+          # yq e = executes the expression
+          # -i = edits the file in place
+
           rm registration.yaml && cp template.yaml registration.yaml
 
       - name: Check-in
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git add registration.yaml
+          git add template.yaml registration.yaml
           git commit -m "🤖 Cleanup"
           git push
