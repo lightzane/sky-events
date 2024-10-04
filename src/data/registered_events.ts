@@ -3,32 +3,33 @@ import { Event } from './events';
 import { uuid } from '../shared/utils';
 
 // These events are registered by the GitHub workflows
+// Refer to branch: register_events/register_events.cjs
 
 export const REGISTERED_EVENTS: Event[] = [
   {
-    "name": "Latest Event is here",
-    "start": +new Date('04-OCT-2024'),
-    "end": +new Date('04-OCT-2024'),
-    "time": {
-      "start": "12am PDT",
-      "end": "11:59pm PDT"
+    name: 'Latest Event is here',
+    start: +new Date('04-OCT-2024'),
+    end: +new Date('04-OCT-2024'),
+    time: {
+      start: '12am PDT',
+      end: '11:59pm PDT',
     },
-    "id": uuid()
+    id: uuid(),
   },
   {
-    "name": "Sample Event",
-    "start": +new Date('04-OCT-2024'),
-    "end": +new Date('04-OCT-2024'),
-    "time": {
-      "start": "12am PDT",
-      "end": "11:59pm PDT"
+    name: 'Sample Event',
+    start: +new Date('04-OCT-2024'),
+    end: +new Date('04-OCT-2024'),
+    time: {
+      start: '12am PDT',
+      end: '11:59pm PDT',
     },
-    "id": uuid()
+    id: uuid(),
   },
   {
-    "name": "Another event is here",
-    "start": +new Date('04-OCT-2024'),
-    "end": +new Date('04-OCT-2024'),
-    "id": uuid()
-  }
+    name: 'Another event is here',
+    start: +new Date('04-OCT-2024'),
+    end: +new Date('04-OCT-2024'),
+    id: uuid(),
+  },
 ];
