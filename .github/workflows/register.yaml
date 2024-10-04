@@ -16,18 +16,11 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: Checkout main branch
-        uses: actions/checkout@v4
-        with:
-          ref: main
-          path: main
-
-      - name: Test
-        run: |
-          echo "Check main"
-          ls main
-          echo "Check reg"
-          ls
+      # - name: Checkout main branch
+      #   uses: actions/checkout@v4
+      #   with:
+      #     ref: main
+      #     path: main
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -99,11 +92,16 @@ jobs:
 
       - name: Check-in
         run: |
-          git config user.name "GitHub Actions"
-          git config user.email "actions@github.com"
-          git add template.yaml registration.yaml
-          git commit -m "🤖 Cleanup"
-          git push
+          if [ -n "$(git status --porcelain)" ]; then
+          # Check if there are any changes (-n = means non-zero length; -z = means zero-length)
+            git config user.name "GitHub Actions"
+            git config user.email "actions@github.com"
+            git add template.yaml registration.yaml registered_events.yaml
+            git commit -m "🤖 Cleanup"
+            git push
+          else
+            echo "No changes to commit."
+          fi
 
   redeploy:
     needs: register
