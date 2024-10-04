@@ -1,4 +1,12 @@
 # !IMPORTANT!
 # DO NOT directly modify to register events on this file. Please go to registration.yaml and create PR.
 
-events: []
+events:
+  - name: Sample Event
+    start: 04-OCT-2024
+    end: 04-OCT-2024 # Optional. Defaults to start
+    time:
+      start: 12am PDT # Optional
+      end: 11:59pm PDT # Optional
+  - name: Another Event
+    start: 10-OCT-2024
