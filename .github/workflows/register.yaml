@@ -40,7 +40,11 @@ jobs:
 
       - name: Read registration yaml
         run: |
-          yq -r '.events[0].name' registration.yaml
+          yq -o=json '.events' registration.yaml
+
+      - name: Register events
+        run: |
+          yq e '.events += load("registration.yaml").events' -i registered_events.yaml
 
       - name: Get Current Date
         run: |
