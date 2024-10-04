@@ -1,6 +1,6 @@
 events:
   # The name of the event
-  - name: Lessons
+  - name:
     start: 10-OCT-2024
     end: 10-OCT-2024 # Optional. Defaults to start
     time: # Optional
