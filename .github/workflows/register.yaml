@@ -50,7 +50,13 @@ jobs:
 
       - name: Register events
         run: |
-          yq e '.events += load("registration.yaml").events' -i registered_events.yaml
+          # Append to the list
+          # yq e '.events += load("registration.yaml").events' -i registered_events.yaml
+
+          # Prepend to the list
+          yq e '.events |= load("registration.yaml").events + .' -i registered_events.yaml
+
+          # |= --> updates the events list
 
       - name: Get Current Date
         run: |
