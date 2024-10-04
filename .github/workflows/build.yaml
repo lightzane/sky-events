@@ -26,7 +26,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          ref: main
           token: ${{ env.GH_TOKEN }}
+          path: main
 
       - name: Checkout registered events
         uses: actions/checkout@v4
@@ -41,6 +43,7 @@ jobs:
           cache: 'npm'
 
       - name: Install dependencies
+        working-directory: main
         run: npm ci
 
       - name: Install dependencies in register_events branch
@@ -48,13 +51,13 @@ jobs:
         run: npm ci
 
       - name: Register events
-        working-directory: reg
         run: |
-          npm start -- ./registered_events.yaml ../src/data/registered_events.ts
+          node reg/register_events.cjs reg/registered_events.yaml main/src/data/registered_events.ts
 
       # This is already enough for Github pages, however...
       # Must check-in changes for Cloudflar pages to pickup the latest files updated
       - name: Check-in main
+        working-directory: main
         run: |
           rm -rf reg
           if [ -n "$(git status --porcelain)" ]; then
