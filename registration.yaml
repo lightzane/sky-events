@@ -1,8 +1,7 @@
 events:
-  # The name of the event
-  - name: Sample event
-    start: 10-OCT-2024
-    end: 10-OCT-2024 # Optional. Defaults to start
+  - name:
+    start: $CURRENT_DATE
+    end: $CURRENT_DATE # Optional. Defaults to start
     time: # Optional
       start: 12am PDT
       end: 11:59pm PDT
