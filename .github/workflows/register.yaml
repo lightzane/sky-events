@@ -39,4 +39,4 @@ jobs:
 
       - name: Read registration yaml
         run: |
-          yq r -r '.events[0].name' reg/registered_events.yaml
+          yq -r '.events[0].name' registered_events.yaml
