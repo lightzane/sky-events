@@ -108,7 +108,4 @@ jobs:
 
   redeploy:
     needs: register
-    runs-on: ubuntu-latest
-    steps:
-      - name: Run it
-        run: echo "Success"
+    uses: lightzane/sky-events/.github/workflows/ci.yaml@main
