@@ -9,6 +9,7 @@ jobs:
   # Single deploy job since we're just deploying
   register:
     runs-on: ubuntu-latest
+    if: github.event.head_commit.author.email != 'actions@github.com'
     steps:
       - name: Checkout this branch
         uses: actions/checkout@v4
