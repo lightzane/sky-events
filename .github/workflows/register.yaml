@@ -96,8 +96,10 @@ jobs:
           # Check if there are any changes (-n = means non-zero length; -z = means zero-length)
             git config user.name "GitHub Actions"
             git config user.email "actions@github.com"
+
             git add template.yaml registration.yaml registered_events.yaml
-            git commit -m "🤖 Cleanup"
+            git commit -m "🤖 Register and Cleanup"
+            
             git push
           else
             echo "No changes to commit."

@@ -1,5 +1,5 @@
 events:
-  - name:
+  - name: Supreme Commander
     start: 04-OCT-2024
     end: 04-OCT-2024 # Optional. Defaults to start
     time: # Optional
