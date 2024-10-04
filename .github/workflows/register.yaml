@@ -67,8 +67,8 @@ jobs:
           echo "Today is $CURRENT_DATE"
 
           # Update template.yaml
-          yq e '.events[0].start = $CURRENT_DATE' -i template.yaml
-          yq e '.events[0].end = $CURRENT_DATE' -i template.yaml
+          yq e '.events[0].start = "$CURRENT_DATE"' -i template.yaml
+          yq e '.events[0].end = "$CURRENT_DATE"' -i template.yaml
 
           # yq e = executes the expression
           # -i = edits the file in place

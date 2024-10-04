@@ -1,6 +1,6 @@
 events:
   # The name of the event
-  - name:
+  - name: Sample event
     start: 10-OCT-2024
     end: 10-OCT-2024 # Optional. Defaults to start
     time: # Optional
