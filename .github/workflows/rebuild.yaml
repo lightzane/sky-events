@@ -1,0 +1,13 @@
+name: Rebuild
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: register_events
+
+jobs:
+  rebuild:
+    if: github.event.head_commit.author.email != 'actions@github.com'
+    uses: lightzane/sky-events/.github/workflows/build.yaml@main
+    secrets:
+      token: ${{ secrets.GH_TOKEN }}
