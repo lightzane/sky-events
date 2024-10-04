@@ -3,6 +3,7 @@ import { uuid } from '../shared/utils';
 import imgDoubleLight from '../assets/Double-candle-event-September-2024.webp';
 import { Shards } from './shards';
 import { DateTime } from 'luxon';
+import { REGISTERED_EVENTS } from './registered_events';
 
 export type Event = {
   id: string;
@@ -39,6 +40,7 @@ const defaultTime = {
 // *    Featured Events
 // * =============================================================================
 export const FEATURED_EVENTS: Event[] = [
+  ...REGISTERED_EVENTS,
   {
     id: uuid(),
     name: '⚜ Season of Duets',
