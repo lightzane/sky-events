@@ -31,13 +31,29 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Checkout registered events
+        uses: actions/checkout@v4
+        with:
+          ref: register_events
+          path: reg
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
+
       - name: Install dependencies
         run: npm ci
+
+      - name: Install dependencies in register_events branch
+        working-directory: reg
+        run: npm ci
+
+      - name: Register events
+        working-directory: reg
+        run: |
+          npm start -- reg/registered_events.yaml src/data/registered_events.ts
 
       - name: Build
         run: npm run build
