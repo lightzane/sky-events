@@ -7,6 +7,16 @@ import { uuid } from '../shared/utils';
 
 export const REGISTERED_EVENTS: Event[] = [
   {
+    "name": "GG",
+    "start": +new Date('04-OCT-2024'),
+    "end": +new Date('04-OCT-2024'),
+    "time": {
+      "start": "12am PDT",
+      "end": "11:59pm PDT"
+    },
+    "id": uuid()
+  },
+  {
     "name": "Test",
     "start": +new Date('06-OCT-2024'),
     "time": {
