@@ -1,5 +1,4 @@
-# Simple workflow for deploying static content to GitHub Pages
-name: Deployment of static content to Pages
+name: Registration of other events
 
 on:
   # Runs on pushes targeting the default branch
@@ -16,9 +15,6 @@ jobs:
   # Single deploy job since we're just deploying
   deploy:
     if: github.event.head_commit.author.email != 'actions@github.com'
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -68,3 +64,4 @@ jobs:
           fi
 
       # Cloudflare has a separate deployment build
+      # Github pages is removed
