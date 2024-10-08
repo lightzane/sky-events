@@ -2,10 +2,10 @@
 # Please remove optional field entire line if no value is provided
 
 events:
-  - name:
-    start: 04-OCT-2024
-    end: 04-OCT-2024 # Optional. Defaults to start
+  - name: ⚜️ Season of Moomin
+    start: 14-OCT-2024
+    end: 29-DEC-2024 # Optional. Defaults to start
     time:
       start: 12am PDT # Optional
       end: 11:59pm PDT # Optional
-    imageUrl: # Optional
+    imageUrl: https://img2.storyblok.com/fit-in/0x1000/filters:format(webp)/f/108104/1920x1080/eef35b4e00/moomin24header.jpg # Optional
