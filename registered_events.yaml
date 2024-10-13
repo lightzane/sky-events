@@ -2,6 +2,13 @@
 # DO NOT directly modify to register events on this file. Please go to registration.yaml and create PR.
 
 events:
+  - name: Days of Mischief
+    start: 21-OCT-2024
+    end: 10-NOV-2024 # Optional. Defaults to start
+    time:
+      start: 12am PDT # Optional
+      end: 11:59pm PDT # Optional
+    imageUrl: "https://d2duuy9yo5pldo.cloudfront.net/thatgamecompany/605d1079-2015-4d3d-8197-f57103f6e1e9.jpg"
   - name: ⚜️ Season of Moomin
     start: 14-OCT-2024
     end: 29-DEC-2024 # Optional. Defaults to start
