@@ -7,6 +7,17 @@ import { uuid } from '../shared/utils';
 
 export const REGISTERED_EVENTS: Event[] = [
   {
+    "name": "Days of Mischief",
+    "start": +new Date('21-OCT-2024'),
+    "end": +new Date('10-NOV-2024'),
+    "time": {
+      "start": "12am PDT",
+      "end": "11:59pm PDT"
+    },
+    "imageUrl": "https://d2duuy9yo5pldo.cloudfront.net/thatgamecompany/605d1079-2015-4d3d-8197-f57103f6e1e9.jpg",
+    "id": uuid()
+  },
+  {
     "name": "⚜️ Season of Moomin",
     "start": +new Date('14-OCT-2024'),
     "end": +new Date('29-DEC-2024'),
