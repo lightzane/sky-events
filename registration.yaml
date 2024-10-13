@@ -8,4 +8,4 @@ events:
     time:
       start: 12am PDT # Optional
       end: 11:59pm PDT # Optional
-    imageUrl: https://d2duuy9yo5pldo.cloudfront.net/thatgamecompany/605d1079-2015-4d3d-8197-f57103f6e1e9.jpg
+    imageUrl: "https://d2duuy9yo5pldo.cloudfront.net/thatgamecompany/605d1079-2015-4d3d-8197-f57103f6e1e9.jpg"
