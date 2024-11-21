@@ -2,10 +2,32 @@
 # Please remove optional field entire line if no value is provided
 
 events:
-  - name:
-    start: 13-OCT-2024
-    end: 13-OCT-2024 # Optional. Defaults to start
+  - name: Days of Music
+    start: 25-NOV-2024
+    end: 8-DEC-2024 # Optional. Defaults to start
     time:
       start: 12am PDT # Optional
       end: 11:59pm PDT # Optional
-    imageUrl: # Optional
+    imageUrl: https://d2duuy9yo5pldo.cloudfront.net/thatgamecompany/8a3c2f15-2f95-474a-9b3e-876f36d0f8f1.jpg
+
+  - name: Days of Giving
+    start: 9-DEC-2024
+    end: 22-DEC-2024 # Optional. Defaults to start
+    time:
+      start: 12am PDT # Optional
+      end: 11:59pm PDT # Optional
+
+  - name: Days of Feast
+    start: 23-DEC-2024
+    end: 12-JAN-2025 # Optional. Defaults to start
+    time:
+      start: 12am PDT # Optional
+      end: 11:59pm PDT # Optional
+    imageUrl: https://d2duuy9yo5pldo.cloudfront.net/thatgamecompany/c60c18d1-296d-4bf9-90bd-0706895495e3.png
+
+  - name: Visiting Spirits
+    start: 13-JAN-2025
+    end: 26-JAN-2025 # Optional. Defaults to start
+    time:
+      start: 12am PDT # Optional
+      end: 11:59pm PDT # Optional
