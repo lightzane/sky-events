@@ -2,27 +2,10 @@
 # Please remove optional field entire line if no value is provided
 
 events:
-  - name: ⚜️ Season of Radiance
-    start: 20-JAN-2025
-    end: 6-APR-2025 # Optional. Defaults to start
+  - name:
+    start: 17-JAN-2025
+    end: 17-JAN-2025 # Optional. Defaults to start
     time:
       start: 12am PDT # Optional
       end: 11:59pm PDT # Optional
-    imageUrl: https://d2duuy9yo5pldo.cloudfront.net/thatgamecompany/6ae8094a-7a8b-414b-add6-ff7400ea706d.jpg # Optional
-
-  - name: Days of Fortune
-    start: 27-JAN-2025
-    end: 9-FEB-2025 # Optional. Defaults to start
-    time:
-      start: 12am PDT # Optional
-      end: 11:59pm PDT # Optional
-    imageUrl: https://d2duuy9yo5pldo.cloudfront.net/thatgamecompany/89bebddd-0004-4418-9994-5ee9c55b9d31.png # Optional
-
-  - name: Days of Love
-    start: 10-FEB-2025
-    end: 23-FEB-2025 # Optional. Defaults to start
-    time:
-      start: 12am PDT # Optional
-      end: 11:59pm PDT # Optional
-    imageUrl: https://d2duuy9yo5pldo.cloudfront.net/thatgamecompany/f8ceeaf3-cf55-440e-89f0-7d97ad507bb3.jpg # Optionalt
-
+    imageUrl: # Optional
