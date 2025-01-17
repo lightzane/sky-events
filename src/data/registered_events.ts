@@ -7,6 +7,39 @@ import { uuid } from '../shared/utils';
 
 export const REGISTERED_EVENTS: Event[] = [
   {
+    "name": "⚜️ Season of Radiance",
+    "start": +new Date('20-JAN-2025'),
+    "end": +new Date('6-APR-2025'),
+    "time": {
+      "start": "12am PDT",
+      "end": "11:59pm PDT"
+    },
+    "imageUrl": "https://d2duuy9yo5pldo.cloudfront.net/thatgamecompany/6ae8094a-7a8b-414b-add6-ff7400ea706d.jpg",
+    "id": uuid()
+  },
+  {
+    "name": "Days of Fortune",
+    "start": +new Date('27-JAN-2025'),
+    "end": +new Date('9-FEB-2025'),
+    "time": {
+      "start": "12am PDT",
+      "end": "11:59pm PDT"
+    },
+    "imageUrl": "https://d2duuy9yo5pldo.cloudfront.net/thatgamecompany/89bebddd-0004-4418-9994-5ee9c55b9d31.png",
+    "id": uuid()
+  },
+  {
+    "name": "Days of Love",
+    "start": +new Date('10-FEB-2025'),
+    "end": +new Date('23-FEB-2025'),
+    "time": {
+      "start": "12am PDT",
+      "end": "11:59pm PDT"
+    },
+    "imageUrl": "https://d2duuy9yo5pldo.cloudfront.net/thatgamecompany/f8ceeaf3-cf55-440e-89f0-7d97ad507bb3.jpg",
+    "id": uuid()
+  },
+  {
     "name": "Days of Music",
     "start": +new Date('25-NOV-2024'),
     "end": +new Date('8-DEC-2024'),
