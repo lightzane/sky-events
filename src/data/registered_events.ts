@@ -7,6 +7,17 @@ import { uuid } from '../shared/utils';
 
 export const REGISTERED_EVENTS: Event[] = [
   {
+    "name": "Days of Treasure",
+    "start": +new Date('03-MAR-2025'),
+    "end": +new Date('16-MAR-2025'),
+    "time": {
+      "start": "12am PDT",
+      "end": "11:59pm PDT"
+    },
+    "imageUrl": "https://img2.storyblok.com/fit-in/0x1000/filters:format(webp)/f/108104/1920x1080/f68504e60a/dotr_3kids-digging-header_sls_na_na_2502.jpg",
+    "id": uuid()
+  },
+  {
     "name": "⚜️ Season of Radiance",
     "start": +new Date('20-JAN-2025'),
     "end": +new Date('6-APR-2025'),
