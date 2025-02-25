@@ -3,8 +3,8 @@
 
 events:
   - name:
-    start: 17-JAN-2025
-    end: 17-JAN-2025 # Optional. Defaults to start
+    start: 25-FEB-2025
+    end: 25-FEB-2025 # Optional. Defaults to start
     time:
       start: 12am PDT # Optional
       end: 11:59pm PDT # Optional

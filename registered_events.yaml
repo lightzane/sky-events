@@ -2,6 +2,13 @@
 # DO NOT directly modify to register events on this file. Please go to registration.yaml and create PR.
 
 events:
+  - name: Days of Treasure
+    start: 03-MAR-2025
+    end: 16-MAR-2025 # Optional. Defaults to start
+    time:
+      start: 12am PDT # Optional
+      end: 11:59pm PDT # Optional
+    imageUrl: https://img2.storyblok.com/fit-in/0x1000/filters:format(webp)/f/108104/1920x1080/f68504e60a/dotr_3kids-digging-header_sls_na_na_2502.jpg # Optional
   - name: ⚜️ Season of Radiance
     start: 20-JAN-2025
     end: 6-APR-2025 # Optional. Defaults to start
